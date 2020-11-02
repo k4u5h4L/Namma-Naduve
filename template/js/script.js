@@ -1,6 +1,23 @@
 jQuery(document).ready(function($) {
 	
 	"use strict";
+
+	DarkReader.setFetchMethod(window.fetch);
+
+	if (localStorage.getItem('theme') == null || localStorage.getItem('theme') == undefined || localStorage.getItem('theme') == 'light') {
+		DarkReader.disable();
+		localStorage.setItem('theme', 'light');
+	} else {
+		DarkReader.enable({
+			brightness: 100,
+			contrast: 90,
+			sepia: 10
+		});
+
+		document.getElementById('nightmode1').setAttribute('checked', null);
+	
+		localStorage.setItem('theme', 'dark');
+	}
 	
 //------- Notifications Dropdowns
   $('.top-area > .setting-area > li').on("click",function(){
@@ -125,13 +142,23 @@ $('.notification-box > ul li > i.del').on("click", function(){
 	  });	
 	  
 /*--- topbar toogle setting dropdown ---*/	
-$('#nightmode').on('change', function() {
+$('#nightmode1').on('change', function() {
     if ($(this).is(':checked')) {
         // Show popup window
-        $(".theme-layout").addClass('black');	
+		$(".theme-layout").addClass('black');	
+		// DarkReader.setFetchMethod(window.fetch);
+		DarkReader.enable({
+			brightness: 100,
+			contrast: 90,
+			sepia: 10
+		});
+
+		localStorage.setItem('theme', 'dark');
     }
 	else {
-        $(".theme-layout").removeClass("black");
+		$(".theme-layout").removeClass("black");
+		DarkReader.disable();
+		localStorage.setItem('theme', 'light');
     }
 });
 
