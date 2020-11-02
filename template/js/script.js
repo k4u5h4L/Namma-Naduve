@@ -15,6 +15,8 @@ jQuery(document).ready(function($) {
 		});
 
 		document.getElementById('nightmode1').setAttribute('checked', null);
+		document.getElementById('nightmode').setAttribute('checked', null);
+		// document.getElementById('nightmode1')[1].setAttribute('checked', null);
 	
 		localStorage.setItem('theme', 'dark');
 	}
@@ -143,6 +145,26 @@ $('.notification-box > ul li > i.del').on("click", function(){
 	  
 /*--- topbar toogle setting dropdown ---*/	
 $('#nightmode1').on('change', function() {
+    if ($(this).is(':checked')) {
+        // Show popup window
+		$(".theme-layout").addClass('black');	
+		// DarkReader.setFetchMethod(window.fetch);
+		DarkReader.enable({
+			brightness: 100,
+			contrast: 90,
+			sepia: 10
+		});
+
+		localStorage.setItem('theme', 'dark');
+    }
+	else {
+		$(".theme-layout").removeClass("black");
+		DarkReader.disable();
+		localStorage.setItem('theme', 'light');
+    }
+});
+
+$('#nightmode').on('change', function() {
     if ($(this).is(':checked')) {
         // Show popup window
 		$(".theme-layout").addClass('black');	
