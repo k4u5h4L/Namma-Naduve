@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from django.conf.urls import handler404, handler500
+# from django.conf.urls import url, handler404
+
+# handler404 = 'forum.views.notFoundPage'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('forum.urls')),
 ]
-
-# handler404 = 'forum.views.notFoundPage'

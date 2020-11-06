@@ -8,3 +8,7 @@ def homePage(request):
 
 def faqPage(request):
     return render(request, 'forum/faq.html')
+
+def notFoundPage(request, exception):
+    return render(request, 'forum/404.html')
+
