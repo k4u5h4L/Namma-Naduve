@@ -14,6 +14,12 @@ def profilePage(request, usr_name):
     return render(request, 'forum/profile.html')
 
 
+def profileAboutPage(request, usr_name):
+    print(usr_name)
+    # fetch user with the username variable and display that to user
+    return render(request, 'forum/about.html')
+
+
 def postPage(request, post_id):
     print(post_id)
     # fetch post with the post_id variable and display that to user

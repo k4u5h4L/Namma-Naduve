@@ -6,6 +6,8 @@ urlpatterns = [
     path('', views.homePage, name='homePage'),
     path('search/<str:query>/', views.searchResults, name='searchResults'),
     path('post/<int:post_id>/', views.postPage, name='postPage'),
+    path('user/about/<str:usr_name>/',
+         views.profileAboutPage, name='profileAboutPage'),
     path('user/<str:usr_name>/', views.profilePage, name='profilePage'),
     path('faq/', views.faqPage, name='faqPage'),
 ]
