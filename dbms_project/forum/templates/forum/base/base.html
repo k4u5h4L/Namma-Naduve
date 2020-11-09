@@ -217,7 +217,7 @@
 	
 	<div class="topbar stick">
 		<div class="logo">
-			<a title="" href="newsfeed.html"><img src="{% static 'forum/images/logo.png' %}" alt=""></a>
+			<a title="" href="{% url 'homePage' %}"><img src="{% static 'forum/images/logo.png' %}" alt=""></a>
 		</div>
 		
 		<div class="top-area">
@@ -225,20 +225,20 @@
 				<li>
 					<a href="#" title="">Home</a>
 					<ul>
-						<li><a href="index-2.html" title="">Home Feed</a></li>
+						<li><a href="{% url 'homePage' %}" title="">Home Feed</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="#" title="">Profile</a>
 					<ul>
-						<li><a href="time-line.html" title="">Overview</a></li>
-						<li><a href="timeline-friends.html" title="">About</a></li>
+						<li><a href="{% url 'profilePage' post.author.username %}" title="">Overview</a></li>
+						<li><a href="{% url 'profileAboutPage' %}" title="">About</a></li>
 					</ul>
                 </li>
                 <li>
 					<a href="#" title="">FAQ</a>
 					<ul>
-						<li><a href="faq.html" title="">FAQ's</a></li>
+						<li><a href="{% url 'faqPage' %}" title="">FAQ's</a></li>
 					</ul>
 				</li>
 				<!-- <li>
@@ -278,7 +278,7 @@
 						</form>
 					</div>
 				</li>
-				<li><a href="url 'homePage'" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
+				<li><a href="{% url 'homePage' %}" title="Home" data-ripple=""><i class="ti-home"></i></a></li>
 				<!-- <li>
 					<a href="#" title="Notification" data-ripple="">
 						<i class="ti-bell"></i><span>20</span>
@@ -425,7 +425,7 @@
 					<!-- <a href="#" title=""><span class="status f-online"></span>online</a>
 					<a href="#" title=""><span class="status f-away"></span>away</a>
 					<a href="#" title=""><span class="status f-off"></span>offline</a> -->
-					<a href="#" title=""><i class="ti-user"></i> view profile</a>
+					<a href="{% url 'profilePage:usr_name' username %}" title=""><i class="ti-user"></i> view profile</a>
 					<!-- <a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
 					<a href="#" title=""><i class="ti-target"></i>activity log</a>
 					<a href="#" title=""><i class="ti-settings"></i>account setting</a> -->
@@ -448,7 +448,7 @@
 					<div class="widget">
 						<div class="foot-logo">
 							<div class="logo">
-								<a href="index-2.html" title=""><img src="{% static 'forum/images/logo.png' %}" alt=""></a>
+								<a href="{% url 'homePage' %}" title=""><img src="{% static 'forum/images/logo.png' %}" alt=""></a>
 							</div>	
 							<p>
 								This website was designed keeping DBMS project in mind.
