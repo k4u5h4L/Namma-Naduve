@@ -8,13 +8,20 @@ def homePage(request):
     return render(request, 'forum/index.html')
 
 
-def faqPage(request):
-    return render(request, 'forum/faq.html')
+def profilePage(request, usr_name):
+    print(usr_name)
+    # fetch user with the username variable and display that to user
+    return render(request, 'forum/profile.html')
 
 
 def searchResults(request, query):
     print(query)
+    # do some searching using query string, and send that to the template
     return render(request, 'forum/search.html')
+
+
+def faqPage(request):
+    return render(request, 'forum/faq.html')
 
 
 def notFoundPage(request, exception):
