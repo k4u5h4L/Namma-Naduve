@@ -5,7 +5,7 @@
 		
 	<section>
 		<div class="feature-photo">
-			<figure><img src="{% static 'forum/images/resources/timeline-1.jpg' %}" alt="cover pic"></figure>
+			<figure><img id="coverImg" alt="cover pic" /></figure>
 			<div class="add-btn">
 				<span>Is currently a </span>
 				<a style="color: white;cursor: default;" title="" data-ripple="">Student</a>
@@ -707,5 +707,24 @@
 			</div>
 		</div>	
 	</section>
+
+	<script>
+		let coverImage = document.getElementById('coverImg');
+
+		const coverImages = [
+			"{% static 'forum/images/resources/timeline-1.jpg' %}",
+			"https://images.wallpaperscraft.com/image/palm_trees_sunset_clouds_135077_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/road_asphalt_marking_130996_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/landscape_mountains_sun_140434_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/starry_sky_night_trees_night_landscape_118760_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/beach_night_sea_sky_88045_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/mountains_sky_bali_sunrise_kintamani_indonesia_95497_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/mountains_sea_ocean_clouds_night_96938_1920x1080.jpg",
+		];
+
+		coverImage.src = coverImages[Math.floor(Math.random() * coverImages.length)];
+		
+		coverImage.style.height = "520px";
+	</script>
 
 	{% endblock content %}

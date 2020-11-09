@@ -14,6 +14,12 @@ def profilePage(request, usr_name):
     return render(request, 'forum/profile.html')
 
 
+def postPage(request, post_id):
+    print(post_id)
+    # fetch post with the post_id variable and display that to user
+    return render(request, 'forum/post.html')
+
+
 def searchResults(request, query):
     print(query)
     # do some searching using query string, and send that to the template
