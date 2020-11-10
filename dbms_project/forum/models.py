@@ -5,8 +5,13 @@ from users.models import CustomUser
 
 # Create your models here.
 
+
 class Tag(models.Model):
     tag_name = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.tag_name
+
 
 class Post(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -19,7 +24,11 @@ class Post(models.Model):
     def __str__(self):
         return self.post_title
 
+
 class Reply(models.Model):
     parent_post = models.ForeignKey(Post, on_delete=models.CASCADE)
     reply_text = models.CharField(max_length=500)
     post_timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.reply_text
