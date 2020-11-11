@@ -104,7 +104,12 @@
 										</figure>
 										<div class="newpst-input">
 											<form method="post">
-												<textarea rows="2" placeholder="post a query"></textarea>
+												<div>
+													<textarea rows="1" placeholder="post title"></textarea>
+												</div>
+												<div>
+													<textarea rows="2" placeholder="post a query"></textarea>
+												</div>
 												<div class="attachments">
 													<ul>
 														<!-- <li>
@@ -141,6 +146,7 @@
 									</div>
 								</div><!-- add post new box -->
 								<div class="loadMore">
+								{% for post in posts %}
 								<div class="central-meta item">
 									<div class="user-post">
 										<div class="friend-info">
@@ -148,145 +154,113 @@
 												<img src="{% static 'forum/images/resources/friend-avatar10.jpg' %}" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="time-line.html" title="">Janice Griffith</a></ins>
-												<span>published: june,2 2018 19:PM</span>
+												<ins><a href="time-line.html" title="">{{ post.author }}</a></ins>
+												<span>published: {{ post.post_timestamp }}</span>
 											</div>
 											<div class="post-meta">
-												<a href="#"><img src="{% static 'forum/images/resources/user-post.jpg' %}" alt="">
-												<div class="we-video-info">
-													<ul>
-														<!-- <li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li> -->
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Replies">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<!-- <li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li> -->
-														<!-- <li class="social-media">
-															<div class="menu">
-															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+												<a href="{% url 'post_page' post.id %}">
+													<!-- <img src="{% static 'forum/images/resources/user-post.jpg' %}" alt="" /> -->
+													<div class="post-meta">
+														<div class="detail">
+															<span>{{ post.post_title }}</span>
+														</div>	
+													</div>
+													<div class="description">
+														<p>
+															{{ post.post_text }}
+														</p>
+													</div>
+													<div class="we-video-info">
+														<ul>
+															<!-- <li>
+																<span class="views" data-toggle="tooltip" title="views">
+																	<i class="fa fa-eye"></i>
+																	<ins>1.2k</ins>
+																</span>
+															</li> -->
+															<li>
+																<span class="comment" data-toggle="tooltip" title="Replies">
+																	<i class="fa fa-comments-o"></i>
+																	<ins>52</ins>
+																</span>
+															</li>
+															<!-- <li>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<i class="ti-heart"></i>
+																	<ins>2.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="dislike" data-toggle="tooltip" title="dislike">
+																	<i class="ti-heart-broken"></i>
+																	<ins>200</ins>
+																</span>
+															</li> -->
+															<!-- <li class="social-media">
+																<div class="menu">
+																	<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																		</div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																		</div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																		</div>
+																	</div>
+																	
 																</div>
-															  </div>
-																<div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																</div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																</div>
-															  </div>
-
-															</div>
-														</li> -->
-													</ul>
-												</div>
-												<div class="post-meta">
-													<div class="detail">
-														<span>Post title</span>
-													</div>	
-												</div>
-												<div class="description">
-													<p>
-														World's most beautiful car in Curabitur, the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
-													</p>
-												</div></a>
+															</li> -->
+														</ul>
+													</div>
+												</a>
 											</div>
 										</div>
 										<div class="coment-area">
 											<ul class="we-comet">
+												{% for reply in replies %}
+												{% if reply.parent_post.id == post.id %}
 												<li>
 													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
+														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
-															<h5><a href="time-line.html" title="">Jason borne</a></h5>
-															<span>1 year ago</span>
+															<h5><a href="#" title="">{{ reply.author.username }}</a></h5>
+															<span>{{ reply.reply_timestamp }}</span>
 															<!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
 														</div>
-														<p>we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post</p>
-													</div>
-													<!-- <ul>
-														<li>
-															<div class="comet-avatar">
-																<img src="images/resources/comet-2.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="time-line.html" title="">alexendra dadrio</a></h5>
-																	<span>1 month ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>yes, really very awesome car i see the features of this car in the official website of <a href="#" title="">#Mercedes-Benz</a> and really impressed :-)</p>
-															</div>
-														</li>
-														<li>
-															<div class="comet-avatar">
-																<img src="images/resources/comet-3.jpg" alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5><a href="time-line.html" title="">Olivia</a></h5>
-																	<span>16 days ago</span>
-																	<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>i like lexus cars, lexus cars are most beautiful with the awesome features, but this car is really outstanding than lexus</p>
-															</div>
-														</li>
-													</ul> -->
-												</li>
-												<li>
-													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
-													</div>
-													<div class="we-comment">
-														<div class="coment-head">
-															<h5><a href="time-line.html" title="">Donald Trump</a></h5>
-															<span>1 week ago</span>
-															<!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
-														</div>
-														<p>we are working for the dance and sing songs. this video is very awesome for the youngster. please vote this video and like our channel
-															<i class="em em-smiley"></i>
-														</p>
+														<p>{{ reply.reply_text }}</p>
 													</div>
 												</li>
-												<li>
+												{% endif %}
+
+												{% endfor %}
+												{% endwith %}
+				
+												{% if replies|length != 0 %}
+												<!-- <li>
 													<a href="#" title="" class="showmore underline">more comments</a>
-												</li>
+												</li> -->
+												{% endif %}
 												<li class="post-comment">
 													<div class="comet-avatar">
 														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
@@ -294,23 +268,6 @@
 													<div class="post-comt-box">
 														<form method="post">
 															<textarea placeholder="Post your comment"></textarea>
-															<!-- <div class="add-smiles">
-																<span class="em em-expressionless" title="add icon"></span>
-															</div>
-															<div class="smiles-bunch">
-																<i class="em em---1"></i>
-																<i class="em em-smiley"></i>
-																<i class="em em-anguished"></i>
-																<i class="em em-laughing"></i>
-																<i class="em em-angry"></i>
-																<i class="em em-astonished"></i>
-																<i class="em em-blush"></i>
-																<i class="em em-disappointed"></i>
-																<i class="em em-worried"></i>
-																<i class="em em-kissing_heart"></i>
-																<i class="em em-rage"></i>
-																<i class="em em-stuck_out_tongue"></i>
-															</div> -->
 															<button type="submit"></button>
 														</form>
 													</div>
@@ -319,99 +276,11 @@
 										</div>
 									</div>
 								</div>
+								{% endfor %}
 								
-								<div class="central-meta item">
-									<div class="user-post">
-										<div class="friend-info">
-											<figure>
-												<img alt="" src="images/resources/friend-avatar10.jpg">
-											</figure>
-											<div class="friend-name">
-												<ins><a title="" href="time-line.html">Janice Griffith</a></ins>
-												<span>published: june,2 2018 19:PM</span>
-											</div>
-											<div class="description">
-													
-													<p>
-														The post to show a summary of linkage to an external website
-													</p>
-												</div>
-											<div class="post-meta">
-												<div class="linked-image align-left">
-													<a title="" href="#"><img alt="" src="{% static 'forum/images/resources/page1.jpg' %}"></a>
-												</div>
-												<div class="detail">
-													<span>Gomma site - very chill</span>
-													<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
-													<a title="" href="#">www.sample.com</a>
-												</div>		
-												<div class="we-video-info">
-													<ul>
-														<!-- <li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li> -->
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Replies">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<!-- <li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li> -->
-														<!-- <li class="social-media">
-															<div class="menu">
-															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																</div>
-															  </div>
-																<div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																</div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																</div>
-															  </div>
-
-															</div>
-														</li> -->
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
 								</div>
-								</div>
-							</div><!-- centerl meta -->
+							</div>
+							<!-- centerl meta -->
 							<div class="col-lg-3">
 								<aside class="sidebar static">
 									<div class="widget">
@@ -421,7 +290,7 @@
 												<a href="#" title=""><img src="{% static 'forum/images/resources/friend-avatar9.jpg' %}" alt=""></a>
 											</figure>
 											<div class="page-meta">
-												<a href="#" title="" class="underline">username</a>
+												<a href="#" title="" class="underline">{{ user.username }}</a>
 												<span><i class="ti-envelope"></i><a href="insight.html" title="">Posts <em>2</em></a></span>
 												<span><i class="ti-comment"></i><a href="insight.html" title="">Replies <em>9</em></a></span>
 											</div>
@@ -655,3 +524,97 @@
 	</section>
 
 	{% endblock content %}
+
+
+	<!-- 
+		<div class="central-meta item">
+									<div class="user-post">
+										<div class="friend-info">
+											<figure>
+												<img alt="" src="images/resources/friend-avatar10.jpg">
+											</figure>
+											<div class="friend-name">
+												<ins><a title="" href="time-line.html">Janice Griffith</a></ins>
+												<span>published: june,2 2018 19:PM</span>
+											</div>
+											<div class="description">
+													
+													<p>
+														The post to show a summary of linkage to an external website
+													</p>
+												</div>
+											<div class="post-meta">
+												<div class="linked-image align-left">
+													<a title="" href="#"><img alt="" src="{% static 'forum/images/resources/page1.jpg' %}"></a>
+												</div>
+												<div class="detail">
+													<span>Gomma site - very chill</span>
+													<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
+													<a title="" href="#">www.sample.com</a>
+												</div>		
+												<div class="we-video-info">
+													<ul>
+														<li>
+															<span class="views" data-toggle="tooltip" title="views">
+																<i class="fa fa-eye"></i>
+																<ins>1.2k</ins>
+															</span>
+														</li>
+														<li>
+															<span class="comment" data-toggle="tooltip" title="Replies">
+																<i class="fa fa-comments-o"></i>
+																<ins>52</ins>
+															</span>
+														</li>
+														<li>
+															<span class="like" data-toggle="tooltip" title="like">
+																<i class="ti-heart"></i>
+																<ins>2.2k</ins>
+															</span>
+														</li>
+														<li>
+															<span class="dislike" data-toggle="tooltip" title="dislike">
+																<i class="ti-heart-broken"></i>
+																<ins>200</ins>
+															</span>
+														</li> -->
+														<!-- <li class="social-media">
+															<div class="menu">
+															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																</div>
+															  </div>
+																<div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																</div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																</div>
+															  </div>
+
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+	 -->

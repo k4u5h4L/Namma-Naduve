@@ -1,11 +1,16 @@
 from django.shortcuts import render
 from django.views.defaults import page_not_found
+from .models import Post, Reply, Tag, CustomUser
 
 # Create your views here.
 
 
 def home_page(request):
-    return render(request, 'forum/index.html')
+    context = {
+        'posts': Post.objects.all().order_by('-post_timestamp'),
+        'replies': Reply.objects.all().order_by('-reply_timestamp'),
+    }
+    return render(request, 'forum/index.html', context)
 
 
 def profile_page(request, usr_name):
