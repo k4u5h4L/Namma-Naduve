@@ -1,0 +1,178 @@
+{% extends "forum/base/search_base.html" %}
+{% load static %}
+{% block title %}Post page{% endblock title %}
+{% block content %}
+ 
+    <section>
+		<div class="gap ext-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="offset-lg-1 col-lg-10">
+						<div class="detail-page">
+							<div class="detail-meta">
+								
+								<h2>{{ object.post_title }}</h2>
+								
+								<div class="post-time">
+									<div class="author-thumb">
+									<img src="{% static 'forum/images/resources/chatlist2.jpg' %}" alt="">
+									<span><a href="#" title="">{{object.author}}</a></span>
+								</div>
+									<span class="post-date">
+										<i class="fa fa-calendar"></i>
+										<a title="" href="#">{{object.post_timestamp}}</a>
+									</span>
+									<span class="coments">
+										<i class="fa fa-comments"></i>
+										<a title="" href="#">25</a>
+									</span>
+								</div>
+								<p>{{object.post_text}}
+									<!-- Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years  Wick is forced back associate plotting. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non. -->
+								</p>
+								<!-- <blockquote>
+									<p>
+										“  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor dolore magna aliqua. ”
+									</p>
+								</blockquote>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non.
+								</p>
+								<figure class="alignright">
+									<img src="images/resources/blog-detail2.jpg" alt="">
+								</figure>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipi slabore et dolore magna aliqua. Ut enim ad minim irure dolor in reprehenderit.
+								</p>
+								<ul>
+									<li>Integer at diam gravida fringilla Nibh preti purus</li>
+									<li>Mauris laoreet, nisl id faucibus pellentesque, mi mi</li>
+									<li>Vivamus accumsan nisl id massa finibus aliquet</li>
+									<li>justo accumsan nisi, non congue metus</li>
+									<li>velit id metus ullamcorper tristique</li>
+									<li>Nisi rutrum, eu ornare augue tristique.</li>
+								</ul> -->
+								<div class="tag-n-cat">
+									<div class="tags">
+										<span><i class="fa fa-tags"></i> Post Tags:</span>
+										<a href="#" title="">{{object.tag_name}}</a>
+										<a href="#" title="">ideas</a>
+										<a href="#" title="">collection</a>
+										<a href="#" title="">exclusive</a>
+										<a href="#" title="">features</a>
+									</div>
+									<!-- <div class="tags">
+										<span><i class="fa fa-filter"></i> Post Categories:</span>
+										<a href="#" title="">News</a>
+										<a href="#" title="">ideas</a>
+										<a href="#" title="">collection</a>
+										<a href="#" title="">exclusive</a>
+										<a href="#" title="">features</a>
+									</div> -->
+								</div>
+								<!-- <div class="gap-60">
+									<div class="site-admin">
+										<div class="admin-avatar">
+											<img src="images/resources/admin4.jpg" alt="">
+										</div>
+										<div class="admin-postmeta">
+											<h4>Sarah William</h4>
+											<span>Web Developer, Online Instructor</span>
+											<p>
+												I always loved computers and technology in general. In 2011 I was lucky enough to be invited.
+											</p>
+											
+										</div>
+									</div>	
+								</div> -->
+								<div class="gap-60 no-top">
+									<div class="comment-area">
+										<h4 class="comment-title">03 comments</h4>
+										<ul class="comments">
+											<li>
+												<div class="comment-box">
+													<div class="commenter-photo">
+														<img alt="" src="{% static 'forum/images/resources/commenter-1.jpg' %}">
+													</div>
+													<div class="commenter-meta">
+														<div class="comment-titles">
+															<h6>willimes doe</h6>
+															<span>12 june 2017</span>
+															<!-- <a title="" href="#" class="reply">reply</a> -->
+														</div>
+														<p>
+															Quis autem velum iure reprehe nderit. Lorem ipsum dolor sit amet adipiscing egetmassa pulvinar eu aliquet nibh dapibus.
+														</p>
+													</div>
+												</div>
+												<!-- <ul>
+													<li>
+														<div class="comment-box">
+															<div class="commenter-photo">
+																<img alt="" src="images/resources/commenter-2.jpg">
+															</div>
+															<div class="commenter-meta">
+																<div class="comment-titles">
+																	<h6>Qlark Jack</h6>
+																	<span>22 july 2017</span>
+																	<a title="" href="#" class="reply">reply</a>
+																</div>
+																	<p>
+																	Quis autem velum iure reprehe nderit. Lorem ipsum dolor sit amet adipiscing egetmassa pulvinar eu aliquet nibh dapibus.
+																</p>
+															</div>
+														</div>	
+													</li>
+												</ul> -->
+											</li>
+											<li>
+												<div class="comment-box">
+													<div class="commenter-photo">
+														<img alt="" src="{% static 'forum/images/resources/commenter-3.jpg' %}">
+													</div>
+													<div class="commenter-meta">
+														<div class="comment-titles">
+															<h6>Olivia Take</h6>
+															<span>15 jan 2016</span>
+														</div>
+														<p>
+															Quis autem velum iure reprehe nderit. Lorem ipsum dolor sit amet adipiscing egetmassa pulvinar eu aliquet nibh dapibus.
+														</p>
+													</div>
+												</div>	
+											</li>
+										</ul>
+									</div>
+								</div><!-- comments sec -->
+								<div class="gap-60 no-gap">
+									<h4 class="comment-title">Leave a Comment</h4>
+									<div class="contact-form">
+										<form method="post">
+											<div class="form-group">	
+											  <input type="text" id="input" required="required"/>
+											  <label class="control-label" for="input">First & Last Name</label><i class="mtrl-select"></i>
+											</div>
+											
+											<div class="form-group">	
+											  <input type="text" required="required"/>
+											  <label class="control-label" for="input">Subject</label><i class="mtrl-select"></i>
+											</div>
+											
+											<div class="form-group">	
+											  <textarea rows="4" id="textarea" required="required"></textarea>
+											  <label class="control-label" for="textarea">Message</label><i class="mtrl-select"></i>
+											</div>
+											<div class="submit-btns">
+												<button class="mtr-btn signup" type="button"><i>Submit</i></button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endblock content %}
