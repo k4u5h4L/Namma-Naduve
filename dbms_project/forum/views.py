@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.defaults import page_not_found
+
 from .models import Post, Reply, Tag, CustomUser
+from .filters import PostFilter
 
 # Create your views here.
 
@@ -25,7 +27,7 @@ def home_page(request):
         context['posts'].append(
             {'post': posts[i], 'replies': replies[i]})
 
-    print(context)
+    # print(context)
 
     return render(request, 'forum/index.html', context)
 
@@ -52,15 +54,25 @@ def post_page(request, post_id):
         'replies': replies,
         'tags': tags,
     }
-    print(context)
-    # fetch post with the post_id variable and display that to user
+    # print(context)
     return render(request, 'forum/post.html', context)
 
 
-def search_results(request, query):
-    print(query)
+def search_results(request):
+    # print(query)
+
+    posts = Post.objects.all()
+
+    postFilter = PostFilter(request.GET, queryset=posts)
+
+    posts = postFilter.qs
+
+    context = {
+        'postFilter': postFilter,
+        'posts': posts,
+    }
     # do some searching using query string, and send that to the template
-    return render(request, 'forum/search.html')
+    return render(request, 'forum/search.html', context)
 
 
 def faq_page(request):
