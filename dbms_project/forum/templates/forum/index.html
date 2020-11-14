@@ -154,20 +154,20 @@
 												<img src="{% static 'forum/images/resources/friend-avatar10.jpg' %}" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="time-line.html" title="">{{ post.author }}</a></ins>
-												<span>published: {{ post.post_timestamp }}</span>
+												<ins><a href="time-line.html" title="">{{ post.post.author }}</a></ins>
+												<span>published: {{ post.post.post_timestamp }}</span>
 											</div>
 											<div class="post-meta">
-												<a href="{% url 'post_page' post.id %}">
+												<a href="{% url 'post_page' post.post.id %}">
 													<!-- <img src="{% static 'forum/images/resources/user-post.jpg' %}" alt="" /> -->
 													<div class="post-meta">
 														<div class="detail">
-															<span>{{ post.post_title }}</span>
+															<span>{{ post.post.post_title }}</span>
 														</div>	
 													</div>
 													<div class="description">
 														<p>
-															{{ post.post_text }}
+															{{ post.post.post_text }}
 														</p>
 													</div>
 													<div class="we-video-info">
@@ -181,7 +181,7 @@
 															<li>
 																<span class="comment" data-toggle="tooltip" title="Replies">
 																	<i class="fa fa-comments-o"></i>
-																	<ins>number_of_comments</ins>
+																	<ins>{{ post.replies|length }}</ins>
 																</span>
 															</li>
 															<!-- <li>
@@ -236,8 +236,7 @@
 										</div>
 										<div class="coment-area">
 											<ul class="we-comet">
-												{% for reply in replies %}
-												{% if reply.parent_post.id == post.id %}
+												{% for reply in post.replies %}
 												<li>
 													<div class="comet-avatar">
 														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
@@ -251,14 +250,13 @@
 														<p>{{ reply.reply_text }}</p>
 													</div>
 												</li>
-												{% endif %}
 
 												{% endfor %}
 				
-												{% if replies|length != 0 %}
-												<!-- <li>
-													<a href="#" title="" class="showmore underline">more comments</a>
-												</li> -->
+												{% if post.replies|length != 0 %}
+												<li>
+													<a href="{% url 'post_page' post.post.id %}" title="" class="showmore underline">more comments</a>
+												</li>
 												{% endif %}
 												<li class="post-comment">
 													<div class="comet-avatar">

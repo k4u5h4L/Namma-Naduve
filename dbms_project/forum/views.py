@@ -7,12 +7,26 @@ from .models import Post, Reply, Tag, CustomUser
 
 def home_page(request):
 
+    posts = Post.objects.all().order_by('-post_timestamp')
+    posts_count = posts.count()
+
     context = {
-        'posts': Post.objects.all().order_by('-post_timestamp'),
-        'replies': Reply.objects.all(),
+        'posts_count': posts_count,
     }
 
-    # print(context)
+    replies = []
+    context['posts'] = []
+
+    for post in posts:
+        replies.append(post.reply_set.all()[:2])
+
+    posts = [post for post in posts]
+    for i in range(len(posts)):
+        context['posts'].append(
+            {'post': posts[i], 'replies': replies[i]})
+
+    print(context)
+
     return render(request, 'forum/index.html', context)
 
 
