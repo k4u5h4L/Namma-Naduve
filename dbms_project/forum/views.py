@@ -6,10 +6,13 @@ from .models import Post, Reply, Tag, CustomUser
 
 
 def home_page(request):
+
     context = {
         'posts': Post.objects.all().order_by('-post_timestamp'),
-        'replies': Reply.objects.all().order_by('-reply_timestamp'),
+        'replies': Reply.objects.all(),
     }
+
+    # print(context)
     return render(request, 'forum/index.html', context)
 
 
@@ -26,9 +29,18 @@ def profile_about_page(request, usr_name):
 
 
 def post_page(request, post_id):
-    print(post_id)
+    # print(post_id)
+    post = Post.objects.get(id=post_id)
+    replies = post.reply_set.all()
+    tags = post.tags.all()
+    context = {
+        'post': post,
+        'replies': replies,
+        'tags': tags,
+    }
+    print(context)
     # fetch post with the post_id variable and display that to user
-    return render(request, 'forum/post.html')
+    return render(request, 'forum/post.html', context)
 
 
 def search_results(request, query):
