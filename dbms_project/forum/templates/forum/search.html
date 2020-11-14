@@ -1,5 +1,8 @@
 {% extends "forum/base/base.html" %}
 {% load static %}
+
+{% block title %}Search{% endblock title %}
+
 {% block strip_css %}<link rel="stylesheet" href="{% static 'forum/css/strip.css' %}">{% endblock strip_css %}
 {% block content %}
 	
@@ -11,18 +14,17 @@
 						<div class="blog-sec">
 							<div class="post-filter-sec">
 								<form method="GET" class="filter-form">
-									{% csrf_token %}
 									<!-- <input type="post" placeholder="Search post"> -->
 									{{ postFilter.form.post_title }}
 									<!-- <button><i class="ti-search"></i></button> -->
-								<div class="purify">
-									<span>filter by</span>
-									<!-- Tags: -->
-										{{ postFilter.form.tags }}
-									<!-- Post Author: -->
-										{{ postFilter.form.author }}
-									<button id="filterBtn" class="btn btn-view" type="submit">Filter</button>
-								</div>
+									<div class="purify">
+										<span>filter by</span>
+										<!-- Tags: -->
+											{{ postFilter.form.tags }}
+										<!-- Post Author: -->
+											{{ postFilter.form.author }}
+										<button id="filterBtn" class="btn btn-view" type="submit">Filter</button>
+									</div>
 								</form>
 							</div>
 							<div class="row">

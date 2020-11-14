@@ -124,7 +124,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+APPEND_SLASH = False
+
 AUTH_USER_MODEL = 'users.CustomUser'
 
+LOGIN_URL = 'landing_page'
 LOGIN_REDIRECT_URL = 'home_page'
-LOGOUT_REDIRECT_URL = 'home_page'
+LOGOUT_REDIRECT_URL = 'landing_page'

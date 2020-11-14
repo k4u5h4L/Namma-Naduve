@@ -1,10 +1,11 @@
 import django_filters
-from django_filters import DateFilter
+from django_filters import CharFilter
 
-from .models import *
+from forum.models import *
 
 
 class PostFilter(django_filters.FilterSet):
+    post_title = CharFilter(field_name='post_title', lookup_expr='icontains')
 
     class Meta:
         model = Post

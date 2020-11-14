@@ -37,12 +37,21 @@
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="login-reg-bg">
+					<div class="align-center" style="margin-top: 25%; margin-left: 40%;">
+						{% if messages %}
+							{% for message in messages %}
+								<div class="alert alert-{{ message.tags }}">
+									{{ message }}
+								</div>
+							{% endfor %}
+						{% endif %}
+					</div>
 					<div class="log-reg-area sign">
 						<h2 class="log-title">Login</h2>
 							<p>
 								Hop in and start using (sitename)
 							</p>
-						<form method="post" action="">
+						<form method="POST" action="/landing/login/" name="loginForm" id="loginForm">
 							{% csrf_token %}
 							<div class="form-group">	
 							  <!-- <input type="text" id="input" required="required"/>  -->
@@ -79,7 +88,7 @@
 							<p>
 								Sign up for an exceptional UI and responsiveness	
 							</p>
-						<form method="post" action="">
+						<form method="POST" action="/landing/register/" name="registerForm" id="registerForm">
 							{% csrf_token %}
 							<div class="form-group">	
 							  <!-- <input type="text" required="required"/> -->
@@ -122,9 +131,11 @@
 								<input type="checkbox" checked="checked"/><i class="check-box"></i>Accept Terms & Conditions ?
 							  </label>
 							</div> -->
+							
 							<a href="#" title="" class="already-have align-right">Already have an account?</a>
 							<div class="submit-btns">
-								<button class="mtr-btn signup" type="submit"><span>Register</span></button>
+								<!-- <button class="mtr-btn signup" type="submit"><span>Register</span></button> -->
+								<input class="mtr-btn signup" type="submit" placeholder="Register" value="Register" style="background-color: white;"/>
 							</div>
 						</form>
 					</div>
