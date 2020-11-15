@@ -16,11 +16,15 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 
 
 def landing_page(request):
-    form = CustomUserCreationForm()
+    if request.user.is_authenticated:
+        return redirect('home_page')
+    else:
 
-    context = {'form': form}
+        form = CustomUserCreationForm()
 
-    return render(request, 'users/landing.html', context)
+        context = {'form': form}
+
+        return render(request, 'users/landing.html', context)
 
 
 def login(request):
