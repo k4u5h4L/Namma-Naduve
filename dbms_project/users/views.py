@@ -48,14 +48,19 @@ def logout(request):
 
 def register(request):
     if request.method == "POST":
-        print(request.POST)
+        # print(request.POST)
         form = CustomUserCreationForm(request.POST)
 
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
             # messages.success(request, f'Account created for {username}!')
             print(f'Account created for {username}!')
+
+            user = authenticate(request, username=username, password=password)
+
+            auth_login(request, user)
 
             return redirect('home_page')
         else:

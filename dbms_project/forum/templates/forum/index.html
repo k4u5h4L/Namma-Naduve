@@ -287,9 +287,9 @@
 												<a href="#" title=""><img src="{% static 'forum/images/resources/friend-avatar9.jpg' %}" alt=""></a>
 											</figure>
 											<div class="page-meta">
-												<a href="#" title="" class="underline">username</a>
-												<span><i class="ti-envelope"></i><a href="insight.html" title="">Posts <em>2</em></a></span>
-												<span><i class="ti-comment"></i><a href="insight.html" title="">Replies <em>9</em></a></span>
+												<a href="#" title="" class="underline">{{ user.username }}</a>
+												<span><i class="ti-envelope"></i><a href="#" title="">Posts <em>{{ user_posts_count }}</em></a></span>
+												<span><i class="ti-comment"></i><a href="#" title="">Replies <em>{{ user_replies_count }}</em></a></span>
 											</div>
 											<div class="page-likes">
 												<ul class="nav nav-tabs likes-btn">

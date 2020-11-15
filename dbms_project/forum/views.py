@@ -31,6 +31,14 @@ def home_page(request):
 
     # print(context)
 
+    # print(request.user)
+
+    user_posts_count = Post.objects.filter(author=request.user).count()
+    user_replies_count = Reply.objects.filter(author=request.user).count()
+
+    context['user_posts_count'] = user_posts_count
+    context['user_replies_count'] = user_replies_count
+
     return render(request, 'forum/index.html', context)
 
 
