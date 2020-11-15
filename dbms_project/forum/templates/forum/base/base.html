@@ -71,20 +71,16 @@
 						<li><a href="faq.html" title="">FAQ's</a></li>
 					</ul>
 				</li>
-				<!-- <li><span>Account Setting</span>
-					<ul>
-						<li><a href="create-fav-page.html" title="">create fav page</a></li>
-						<li><a href="edit-account-setting.html" title="">edit account setting</a></li>
-						<li><a href="edit-interest.html" title="">edit-interest</a></li>
-						<li><a href="edit-password.html" title="">edit-password</a></li>
-						<li><a href="edit-profile-basic.html" title="">edit profile basics</a></li>
-						<li><a href="edit-work-eductation.html" title="">edit work educations</a></li>
-						<li><a href="messages.html" title="">message box</a></li>
-						<li><a href="inbox.html" title="">Inbox</a></li>
-						<li><a href="notifications.html" title="">notifications page</a></li>
-					</ul>
-				</li>
-				<li><span>forum</span>
+				{% if messages %}
+					<li><span>Messages:</span>
+							{% for message in messages %}
+								<div class="alert alert-{{ message.tags }}">
+									{{ message }}
+								</div>
+							{% endfor %}
+					</li>
+				{% endif %}
+				<!-- <li><span>forum</span>
 					<ul>
 						<li><a href="forum.html" title="">Forum Page</a></li>
 						<li><a href="forums-category.html" title="">Fourm Category</a></li>
@@ -242,6 +238,14 @@
 						<li><a href="{% url 'faq_page' %}" title="">FAQ's</a></li>
 					</ul>
 				</li>
+				{% if messages %}
+					<span>Message: </span>
+							{% for message in messages %}
+								<!-- <div class="alert alert-{{ message.tags }}"> -->
+									{{ message }}
+								<!-- </div> -->
+							{% endfor %}
+				{% endif %}
 				<!-- <li>
 					<a href="#" title="">account settings</a>
 					<ul>
