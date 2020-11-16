@@ -7,7 +7,7 @@ from django.contrib import messages
 from .models import Post, Reply, Tag, CustomUser
 from .filters import PostFilter
 
-from .forms import PostForm
+from .forms import PostForm, ReplyForm
 
 
 # Create your views here.
@@ -141,6 +141,8 @@ def create_post(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            post.tags = form.cleaned_data.get('tags')
+            print(post.tags)
             post.save()
 
             post_title = form.cleaned_data.get('post_title')
@@ -148,13 +150,38 @@ def create_post(request):
             messages.success(request, f'Your post was posted successfully')
 
         else:
-            print("Form wasn't valid")
+            # print("Form wasn't valid")
             messages.error(
                 request, f'Form is not validated')
 
         return redirect('home_page')
     else:
-        print("A GET req was made")
+        # print("A GET req was made")
+        return redirect('home_page')
+
+
+@login_required
+def create_reply(request):
+    if request.method == "POST":
+        form = ReplyForm(request.POST)
+
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.author = request.user
+            reply.save()
+
+            reply_text = form.cleaned_data.get('reply_text')
+            print(f'Reply just saved successfully: {reply_text}!')
+            messages.success(request, f'Your reply was posted successfully')
+
+        else:
+            # print("Form wasn't valid")
+            messages.error(
+                request, f'Form is not validated')
+
+        return redirect('home_page')
+    else:
+        # print("A GET req was made")
         return redirect('home_page')
 
 
