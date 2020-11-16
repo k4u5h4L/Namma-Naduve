@@ -107,10 +107,11 @@
 												{% csrf_token %}
 												<div>
 													<!-- <textarea rows="1" name="post_title" placeholder="post title"></textarea> -->
+													{{ form.post_title }}
 												</div>
 												<div>
 													<!-- <textarea rows="2" name="post_text" placeholder="post a query"></textarea> -->
-													{{ form }}
+													{{ form.post_text }}
 												</div>
 												<div class="attachments">
 													<ul>
@@ -138,6 +139,7 @@
 																<input type="file">
 															</label>
 														</li> -->
+														{{ form.tags }}
 														<li>
 															<button type="submit">Post</button>
 														</li>
