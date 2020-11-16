@@ -258,7 +258,7 @@
 										<h4 class="widget-title">Your profile</h4>	
 										<div class="your-page">
 											<figure>
-												<a href="#" title=""><img src="{% static 'forum/images/resources/friend-avatar9.jpg' %}" alt=""></a>
+												<a href="#" title=""><img src="{{ user.profile.image.url }}" alt=""></a>
 											</figure>
 											<div class="page-meta">
 												<a href="{% url 'profile_page' user.username %}" title="" class="underline">{{ user.username }}</a>
