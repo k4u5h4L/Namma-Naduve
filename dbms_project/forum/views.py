@@ -133,14 +133,16 @@ def search_results(request):
     return render(request, 'forum/search.html', context)
 
 
+@login_required
 def create_post(request):
     if request.method == "POST":
-        print(request.POST)
-        print(request.user)
         form = PostForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+
             post_title = form.cleaned_data.get('post_title')
             print(f'Post just posted successfully: {post_title}!')
             messages.success(request, f'Your post was posted successfully')
