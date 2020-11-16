@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 't0tg=#gig0-+j+=wc^2ou%9e42hxwn8(%!id(kb0__8wdjfyc3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # Put debug = False to get the custom 404 error page
 
 ALLOWED_HOSTS = ['127.0.0.1', '*']
