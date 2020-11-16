@@ -15,7 +15,7 @@
 										<ul class="naves">
 											<li>
 												<i class="ti-user"></i>
-												<a href="newsfeed.html" title="">Profile</a>
+												<a href="{% url 'profile_page' user.username %}" title="">Profile</a>
 											</li>
 											<li>
 												<i class="ti-clipboard"></i>
@@ -23,7 +23,7 @@
 											</li>
 											<li>
 												<i class="ti-power-off"></i>
-												<a href="logout.html" title="">Logout</a>
+												<a href="{% url 'logout_page' %}" title="">Logout</a>
 											</li>
 										</ul>
 									</div><!-- Shortcuts -->
@@ -158,7 +158,7 @@
 												<img src="{% static 'forum/images/resources/friend-avatar10.jpg' %}" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="time-line.html" title="">{{ post.post.author }}</a></ins>
+												<ins><a href="{% url 'profile_page' post.post.author.username %}" title="">{{ post.post.author }}</a></ins>
 												<span>published: {{ post.post.post_timestamp }}</span>
 											</div>
 											<div class="post-meta">
@@ -215,7 +215,7 @@
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
-															<h5><a href="#" title="">{{ reply.author.username }}</a></h5>
+															<h5><a href="{% url 'profile_page' reply.author.username %}" title="">{{ reply.author.username }}</a></h5>
 															<span>{{ reply.reply_timestamp }}</span>
 															<!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
 														</div>
@@ -261,7 +261,7 @@
 												<a href="#" title=""><img src="{% static 'forum/images/resources/friend-avatar9.jpg' %}" alt=""></a>
 											</figure>
 											<div class="page-meta">
-												<a href="#" title="" class="underline">{{ user.username }}</a>
+												<a href="{% url 'profile_page' user.username %}" title="" class="underline">{{ user.username }}</a>
 												<span><i class="ti-envelope"></i><a href="#" title="">Posts <em>{{ user_posts_count }}</em></a></span>
 												<span><i class="ti-comment"></i><a href="#" title="">Replies <em>{{ user_replies_count }}</em></a></span>
 											</div>

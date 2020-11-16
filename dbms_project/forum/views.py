@@ -85,7 +85,7 @@ def profile_page(request, usr_name):
     context['user_posts_count'] = user_posts_count
     context['user_replies_count'] = user_replies_count
 
-    print(context)
+    # print(context)
 
     return render(request, 'forum/profile.html', context)
 

@@ -27,3 +27,17 @@ class CustomUser(AbstractUser):
     # full_name = models.CharField(max_length=50, null=True)
 
     # image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    location = models.CharField(max_length=100, null=True)
+    phone_no = models.CharField(max_length=14, null=True)
+    personal_site = models.CharField(max_length=60, null=True)
+    bio = models.CharField(max_length=500, null=True)
+    full_name = models.CharField(max_length=50, null=True)
+
+    image = models.ImageField(default='default.png', upload_to='profile_pics')
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
