@@ -107,11 +107,11 @@
 												{% csrf_token %}
 												<div>
 													<!-- <textarea rows="1" name="post_title" placeholder="post title"></textarea> -->
-													{{ form.post_title }}
+													{{ post_form.post_title }}
 												</div>
 												<div>
 													<!-- <textarea rows="2" name="post_text" placeholder="post a query"></textarea> -->
-													{{ form.post_text }}
+													{{ post_form.post_text }}
 												</div>
 												<div class="attachments">
 													<ul>
@@ -139,7 +139,7 @@
 																<input type="file">
 															</label>
 														</li> -->
-														{{ form.tags }}
+														{{ post_form.tags }}
 														<li>
 															<button type="submit">Post</button>
 														</li>
@@ -235,8 +235,10 @@
 														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
 													</div>
 													<div class="post-comt-box">
-														<form method="post" action="/create/reply/">
-															<textarea placeholder="Post your comment"></textarea>
+														<form method="post" action="/create/reply/{{ post.post.id }}">
+															{% csrf_token %}
+															<!-- <textarea placeholder="Post your comment"></textarea> -->
+															{{ reply_form.reply_text }}
 															<button type="submit"></button>
 														</form>
 													</div>
@@ -315,12 +317,18 @@
 	<script>
 		let postTitle = document.getElementById('id_post_title');
 		let postText = document.getElementById('id_post_text');
+		let replyText = document.getElementsByName('reply_text');
 
 		postTitle.placeholder = "Post title";
 		postTitle.className = "form-control";
 
 		postText.placeholder = "Post text";
 		postText.className = "form-control";
+
+		for (let i in replyText) {
+		replyText[i].placeholder = "Send a reply";
+		replyText[i].className += "form-control";
+		}
 	</script>
 
 	{% endblock content %}

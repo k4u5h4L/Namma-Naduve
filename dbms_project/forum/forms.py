@@ -13,4 +13,4 @@ class ReplyForm(ModelForm):
     class Meta:
         model = Reply
         fields = ['reply_text']
-        exclude = ["author", "parent_post"]
+        exclude = ['author', 'parent_post']

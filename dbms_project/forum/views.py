@@ -15,14 +15,16 @@ from .forms import PostForm, ReplyForm
 @login_required
 def home_page(request):
 
-    form = PostForm()
+    post_form = PostForm()
+    reply_form = ReplyForm()
 
     posts = Post.objects.all().order_by('-post_timestamp')
     posts_count = posts.count()
 
     context = {
         'posts_count': posts_count,
-        'form': form,
+        'post_form': post_form,
+        'reply_form': reply_form,
     }
 
     replies = []
@@ -101,7 +103,7 @@ def post_page(request, post_id):
     try:
         post = Post.objects.get(id=post_id)
     except Post.DoesNotExist:
-        raise Http404("No MyModel matches the given query.")
+        raise Http404("No Post matches the given query.")
 
     replies = post.reply_set.all()
     tags = post.tags.all()
@@ -160,13 +162,20 @@ def create_post(request):
 
 
 @login_required
-def create_reply(request):
+def create_reply(request, post_id):
+
+    try:
+        post = Post.objects.get(id=post_id)
+    except Post.DoesNotExist:
+        raise Http404("No Post matches the given query.")
+
     if request.method == "POST":
         form = ReplyForm(request.POST)
 
         if form.is_valid():
             reply = form.save(commit=False)
             reply.author = request.user
+            reply.parent_post = post
             reply.save()
 
             reply_text = form.cleaned_data.get('reply_text')
