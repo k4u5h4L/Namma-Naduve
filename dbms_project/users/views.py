@@ -6,6 +6,8 @@ from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
+from .models import Profile
+
 
 # Create your views here.
 
@@ -65,6 +67,10 @@ def register(request):
             user = authenticate(request, username=username, password=password)
 
             auth_login(request, user)
+
+            # Placeholder code to create a Profile instance as Django signals aren't working
+            profile = Profile(user=request.user)
+            profile.save()
 
             return redirect('home_page')
         else:
