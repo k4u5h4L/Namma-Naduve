@@ -1,0 +1,605 @@
+{% extends "forum/base/base.html" %}
+{% load static %}
+{% block title %}Profile page{% endblock title %}
+{% block content %}
+		
+	<section>
+		<div class="feature-photo">
+			<figure><img id="coverImg" alt="cover pic" /></figure>
+			<div class="add-btn">
+				<span>Is currently a </span>
+				<a style="color: white;cursor: default;" title="" data-ripple="">Student</a>
+			</div>
+			<!-- <form class="edit-phto">
+				<i class="fa fa-camera-retro"></i>
+				<label class="fileContainer">
+					Edit Cover Photo
+				<input type="file"/>
+				</label>
+			</form> -->
+			<div class="container-fluid">
+				<div class="row merged">
+					<div class="col-lg-2 col-sm-3">
+						<div class="user-avatar">
+							<figure>
+								<img src="{% static 'forum/images/resources/user-avatar.jpg' %}" alt="profile pic">
+								<form class="edit-phto">
+									<i class="fa fa-camera-retro"></i>
+									<label class="fileContainer">
+										Edit Profile Pic
+										<input type="file"/>
+									</label>
+								</form>
+							</figure>
+						</div>
+					</div>
+					<div class="col-lg-10 col-sm-9">
+						<div class="timeline-info">
+							<ul>
+								<li class="admin-name">
+								  <h5>{{ user_page.username }}</h5>
+								  <!-- <span>Group Admin</span> -->
+								</li>
+								<li>
+									<a class="active" href="#" title="" data-ripple="">Overview</a>
+									<a class="" href="about.html" title="" data-ripple="">about</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- top area -->
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">Quick Navigation</h4>
+										<ul class="naves">
+											<li>
+												<i class="ti-files"></i>
+												<a href="{% url 'home_page' %}" title="">Home Feed</a>
+											</li>
+											<li>
+												<i class="ti-clipboard"></i>
+												<a href="{% url 'faq_page' %}" title="">FAQ</a>
+											</li>
+											<li>
+												<i class="ti-power-off"></i>
+												<a href="{% url 'logout_page' %}" title="">Logout</a>
+											</li>
+										</ul>
+									</div><!-- Shortcuts -->
+									<!-- <div class="widget">
+										<h4 class="widget-title">Recent Activity</h4>
+										<ul class="activitiez">
+											<li>
+												<div class="activity-meta">
+													<i>10 hours Ago</i>
+													<span><a href="#" title="">Commented on Video posted </a></span>
+													<h6>by <a href="time-line.html">black demon.</a></h6>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>30 Days Ago</i>
+													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>2 Years Ago</i>
+													<span><a href="#" title="">Share a video on her timeline.</a></span>
+													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
+												</div>
+											</li>
+										</ul>
+									</div> -->
+									<!-- recent activites -->
+									<!-- <div class="widget stick-widget">
+										<h4 class="widget-title">Who's follownig</h4>
+										<ul class="followers">
+											<li>
+												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Kelly Bill</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Issabel</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Andrew</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Sophia</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Allen</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+										</ul>
+									</div> -->
+									<!-- who's following -->
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								{% if user.id == user_page.id %}
+								<div class="central-meta">
+									<div class="new-postbox">
+										<figure>
+											<img src="{% static 'forum/images/resources/admin2.jpg' %}" alt="">
+										</figure>
+										<div class="newpst-input">
+											<form method="post">
+												<div>
+													<textarea rows="1" placeholder="post title"></textarea>
+												</div>
+												<div>
+													<textarea rows="2" placeholder="post a query"></textarea>
+												</div>												
+												<div class="attachments">
+													<ul>
+														<!-- <li>
+															<i class="fa fa-music"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-image"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-video-camera"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-camera"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li> -->
+														<li>
+															<button type="submit">Post</button>
+														</li>
+													</ul>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								{% endif %}
+								<!-- add post new box -->
+								{% if posts|length != 0 %}
+								<div class="loadMore">
+									{% for post in posts %}
+									<div class="central-meta item">
+										<div class="user-post">
+											<div class="friend-info">
+												<figure>
+													<img src="{% static 'forum/images/resources/friend-avatar10.jpg' %}" alt="">
+												</figure>
+												<div class="friend-name">
+													<ins><a href="time-line.html" title="">{{ post.post.author }}</a></ins>
+													<span>published: {{ post.post.post_timestamp }}</span>
+												</div>
+												<div class="post-meta">
+													<a href="{% url 'post_page' post.post.id %}">
+														<!-- <img src="{% static 'forum/images/resources/user-post.jpg' %}" alt="" /> -->
+														<div class="post-meta">
+															<div class="detail">
+																<span>{{ post.post.post_title }}</span>
+															</div>	
+														</div>
+														<div class="description">
+															<p>
+																{{ post.post.post_text }}
+															</p>
+														</div>
+														<div class="we-video-info">
+															<ul>
+																<!-- <li>
+																	<span class="views" data-toggle="tooltip" title="views">
+																		<i class="fa fa-eye"></i>
+																		<ins>1.2k</ins>
+																	</span>
+																</li> -->
+																<li>
+																	<span class="comment" data-toggle="tooltip" title="Replies">
+																		<i class="fa fa-comments-o"></i>
+																		<ins>{{ post.replies|length }}</ins>
+																	</span>
+																</li>
+																<!-- <li>
+																	<span class="like" data-toggle="tooltip" title="like">
+																		<i class="ti-heart"></i>
+																		<ins>2.2k</ins>
+																	</span>
+																</li>
+																<li>
+																	<span class="dislike" data-toggle="tooltip" title="dislike">
+																		<i class="ti-heart-broken"></i>
+																		<ins>200</ins>
+																	</span>
+																</li> -->
+																<!-- <li class="social-media">
+																	<div class="menu">
+																		<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																		<div class="rotater">
+																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+																		</div>
+																		<div class="rotater">
+																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																		</div>
+																		<div class="rotater">
+																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+																		</div>
+																		<div class="rotater">
+																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																		</div>
+																		<div class="rotater">
+																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+																		</div>
+																		<div class="rotater">
+																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																			</div>
+																		</div>
+																		<div class="rotater">
+																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																			</div>
+																		</div>
+																		<div class="rotater">
+																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																			</div>
+																		</div>
+																		
+																	</div>
+																</li> -->
+															</ul>
+														</div>
+													</a>
+												</div>
+											</div>
+											<div class="coment-area">
+												<ul class="we-comet">
+													{% for reply in post.replies %}
+													<li>
+														<div class="comet-avatar">
+															<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
+														</div>
+														<div class="we-comment">
+															<div class="coment-head">
+																<h5><a href="#" title="">{{ reply.author.username }}</a></h5>
+																<span>{{ reply.reply_timestamp }}</span>
+																<!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
+															</div>
+															<p>{{ reply.reply_text }}</p>
+														</div>
+													</li>
+	
+													{% endfor %}
+					
+													{% if post.replies|length != 0 %}
+													<li>
+														<a href="{% url 'post_page' post.post.id %}" title="" class="showmore underline">more comments</a>
+													</li>
+													{% endif %}
+													<li class="post-comment">
+														<div class="comet-avatar">
+															<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
+														</div>
+														<div class="post-comt-box">
+															<form method="post">
+																<textarea placeholder="Post your comment"></textarea>
+																<button type="submit"></button>
+															</form>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+									</div>
+									{% else %}
+									<div class="about">
+										<div class="personal">
+											<h6 class="d-flex justify-content-center">
+												Oops! This user doesn't seem to have any posts.
+											</h6>
+										</div>
+									</div>
+									{% endif %}
+								</div>
+								
+								
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">Your profile</h4>	
+										<div class="your-page">
+											<figure>
+												<a href="#" title=""><img src="{% static 'forum/images/resources/friend-avatar9.jpg' %}" alt=""></a>
+											</figure>
+											<div class="page-meta">
+												<a href="#" title="" class="underline">{{ user.username }}</a>
+												<span><i class="ti-envelope"></i><a href="#" title="">Posts <em>{{ user_posts_count }}</em></a></span>
+												<span><i class="ti-comment"></i><a href="#" title="">Replies <em>{{ user_replies_count }}</em></a></span>
+											</div>
+											<div class="page-likes">
+												<ul class="nav nav-tabs likes-btn">
+													<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">posts</a></li>
+													 <li class="nav-item"><a class="" href="#link2" data-toggle="tab">replies</a></li>
+												</ul>
+												<!-- Tab panes -->
+												<div class="tab-content">
+												  <div class="tab-pane active fade show " id="link1" >
+													<span><i class="ti-envelope"></i>884</span>
+													  <a href="#" title="weekly-likes">Some people who've replied</a>
+													  <div class="users-thumb-list">
+														<a href="#" title="Anderw" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-1.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="frank" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-2.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="Sara" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-3.jpg' %}" alt="">  
+														</a>
+													  </div>
+												  </div>
+												  <div class="tab-pane fade" id="link2" >
+													  <span><i class="ti-comments-smiley"></i>440</span>
+													  <a href="#" title="weekly-likes">Some people you've replied to</a>
+													  <div class="users-thumb-list">
+														<a href="#" title="Anderw" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-1.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="frank" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-2.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="Sara" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-3.jpg' %}" alt="">  
+														</a>
+													  </div>
+												  </div>
+												</div>
+											</div>
+										</div>
+									</div><!-- page like widget -->
+									<!-- <div class="widget">
+										<div class="banner medium-opacity bluesh">
+											<div class="bg-image" style="background-image: url(images/resources/baner-widgetbg.jpg)"></div>
+											<div class="baner-top">
+												<span><img alt="" src="images/book-icon.png"></span>
+												<i class="fa fa-ellipsis-h"></i>
+											</div>
+											<div class="banermeta">
+												<p>
+													create your own favourit page.
+												</p>
+												<span>like them all</span>
+												<a data-ripple="" title="" href="#">start now!</a>
+											</div>
+										</div>											
+									</div> -->
+									<!-- <div class="widget friend-list stick-widget">
+										<h4 class="widget-title">Friends</h4>
+										<div id="searchDir"></div>
+										<ul id="people-list" class="friendz-list">
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">bucky barnes</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d7c9ced4c5d2d3cfccc4c5d2e0c7cdc1c9cc8ec3cfcd">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar2.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Sarah Loren</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4d6d5c6dad1c7f4d3d9d5ddd89ad7dbd9">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar3.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">jason borne</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d777c6e72737f5d7a707c7471337e7270">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar4.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Cameron diaz</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bed4dfcdd1d0dcfed9d3dfd7d290ddd1d3">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar5.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">daniel warber</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="553f34263a3b37153238343c397b363a38">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar6.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">andrew</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5933382a36373b193e34383035773a3634">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar7.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">amy watson</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5933382a36373b193e34383035773a3634">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar5.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">daniel warber</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb1baa8b4b5b99bbcb6bab2b7f5b8b4b6">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar2.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Sarah Loren</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2644475448435566414b474f4a0845494b">[email&#160;protected]</a></i>
+												</div>
+											</li>
+										</ul>
+										<div class="chat-box">
+											<div class="chat-head">
+												<span class="status f-online"></span>
+												<h6>Bucky Barnes</h6>
+												<div class="more">
+													<span><i class="ti-more-alt"></i></span>
+													<span class="close-mesage"><i class="ti-close"></i></span>
+												</div>
+											</div>
+											<div class="chat-list">
+												<ul>
+													<li class="me">
+														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="you">
+														<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="me">
+														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+												</ul>
+												<form class="text-box">
+													<textarea placeholder="Post enter to post..."></textarea>
+													<div class="add-smiles">
+														<span title="add icon" class="em em-expressionless"></span>
+													</div>
+													<div class="smiles-bunch">
+														<i class="em em---1"></i>
+														<i class="em em-smiley"></i>
+														<i class="em em-anguished"></i>
+														<i class="em em-laughing"></i>
+														<i class="em em-angry"></i>
+														<i class="em em-astonished"></i>
+														<i class="em em-blush"></i>
+														<i class="em em-disappointed"></i>
+														<i class="em em-worried"></i>
+														<i class="em em-kissing_heart"></i>
+														<i class="em em-rage"></i>
+														<i class="em em-stuck_out_tongue"></i>
+													</div>
+													<button type="submit"></button>
+												</form>
+											</div>
+										</div>
+									</div>friends list sidebar -->
+								</aside>
+							</div><!-- sidebar -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+
+	<script>
+		let coverImage = document.getElementById('coverImg');
+
+		const coverImages = [
+			"{% static 'forum/images/resources/timeline-1.jpg' %}",
+			"https://images.wallpaperscraft.com/image/palm_trees_sunset_clouds_135077_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/road_asphalt_marking_130996_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/landscape_mountains_sun_140434_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/starry_sky_night_trees_night_landscape_118760_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/beach_night_sea_sky_88045_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/mountains_sky_bali_sunrise_kintamani_indonesia_95497_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/mountains_sea_ocean_clouds_night_96938_1920x1080.jpg",
+		];
+
+		coverImage.src = coverImages[Math.floor(Math.random() * coverImages.length)];
+		
+		coverImage.style.height = "520px";
+	</script>
+
+	{% endblock content %}

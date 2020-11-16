@@ -1,0 +1,420 @@
+{% extends "forum/base/base.html" %}
+{% load static %}
+{% block content %}
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">Quick Navigation</h4>
+										<ul class="naves">
+											<li>
+												<i class="ti-user"></i>
+												<a href="newsfeed.html" title="">Profile</a>
+											</li>
+											<li>
+												<i class="ti-clipboard"></i>
+												<a href="{% url 'faq_page' %}" title="">FAQ</a>
+											</li>
+											<li>
+												<i class="ti-power-off"></i>
+												<a href="logout.html" title="">Logout</a>
+											</li>
+										</ul>
+									</div><!-- Shortcuts -->
+									<!-- <div class="widget">
+										<h4 class="widget-title">Recent Activity</h4>
+										<ul class="activitiez">
+											<li>
+												<div class="activity-meta">
+													<i>10 hours Ago</i>
+													<span><a href="#" title="">Commented on Video posted </a></span>
+													<h6>by <a href="time-line.html">black demon.</a></h6>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>30 Days Ago</i>
+													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>2 Years Ago</i>
+													<span><a href="#" title="">Share a video on her timeline.</a></span>
+													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
+												</div>
+											</li>
+										</ul>
+									</div> -->
+									<!-- recent activites -->
+									<!-- <div class="widget stick-widget">
+										<h4 class="widget-title">Who's follownig</h4>
+										<ul class="followers">
+											<li>
+												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Kelly Bill</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Issabel</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Andrew</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Sophia</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Allen</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+										</ul>
+									</div> -->
+									<!-- who's following -->
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								<div class="central-meta">
+									<div class="new-postbox">
+										<figure>
+											<img src="{% static 'forum/images/resources/admin2.jpg' %}" alt="">
+										</figure>
+										<div class="newpst-input">
+											<form method="POST" action="/create/post/">
+												{% csrf_token %}
+												<div>
+													<!-- <textarea rows="1" name="post_title" placeholder="post title"></textarea> -->
+													{{ form.post_title }}
+												</div>
+												<div>
+													<!-- <textarea rows="2" name="post_text" placeholder="post a query"></textarea> -->
+													{{ form.post_text }}
+												</div>
+												<div class="attachments">
+													<ul>
+														<!-- <li>
+															<i class="fa fa-music"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-image"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-video-camera"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-camera"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li> -->
+														{{ form.tags }}
+														<li>
+															<button type="submit">Post</button>
+														</li>
+													</ul>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div><!-- add post new box -->
+								<div class="loadMore">
+								{% for post in posts %}
+								<div class="central-meta item">
+									<div class="user-post">
+										<div class="friend-info">
+											<figure>
+												<img src="{% static 'forum/images/resources/friend-avatar10.jpg' %}" alt="">
+											</figure>
+											<div class="friend-name">
+												<ins><a href="time-line.html" title="">{{ post.post.author }}</a></ins>
+												<span>published: {{ post.post.post_timestamp }}</span>
+											</div>
+											<div class="post-meta">
+												<a href="{% url 'post_page' post.post.id %}">
+													<!-- <img src="{% static 'forum/images/resources/user-post.jpg' %}" alt="" /> -->
+													<div class="post-meta">
+														<div class="detail">
+															<span>{{ post.post.post_title }}</span>
+														</div>	
+													</div>
+													<div class="description">
+														<p>
+															{{ post.post.post_text }}
+														</p>
+													</div>
+													<div class="we-video-info">
+														<ul>
+															<!-- <li>
+																<span class="views" data-toggle="tooltip" title="views">
+																	<i class="fa fa-eye"></i>
+																	<ins>1.2k</ins>
+																</span>
+															</li> -->
+															<li>
+																<span class="comment" data-toggle="tooltip" title="Replies">
+																	<i class="fa fa-comments-o"></i>
+																	<ins>{{ post.replies|length }}</ins>
+																</span>
+															</li>
+															<!-- <li>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<i class="ti-heart"></i>
+																	<ins>2.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="dislike" data-toggle="tooltip" title="dislike">
+																	<i class="ti-heart-broken"></i>
+																	<ins>200</ins>
+																</span>
+															</li> -->
+															
+														</ul>
+													</div>
+												</a>
+											</div>
+										</div>
+										<div class="coment-area">
+											<ul class="we-comet">
+												{% for reply in post.replies %}
+												<li>
+													<div class="comet-avatar">
+														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
+													</div>
+													<div class="we-comment">
+														<div class="coment-head">
+															<h5><a href="#" title="">{{ reply.author.username }}</a></h5>
+															<span>{{ reply.reply_timestamp }}</span>
+															<!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
+														</div>
+														<p>{{ reply.reply_text }}</p>
+													</div>
+												</li>
+
+												{% endfor %}
+				
+												{% if post.replies|length != 0 %}
+												<li>
+													<a href="{% url 'post_page' post.post.id %}" title="" class="showmore underline">more comments</a>
+												</li>
+												{% endif %}
+												<li class="post-comment">
+													<div class="comet-avatar">
+														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
+													</div>
+													<div class="post-comt-box">
+														<form method="post">
+															<textarea placeholder="Post your comment"></textarea>
+															<button type="submit"></button>
+														</form>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								
+								</div>
+							</div>
+							<!-- centerl meta -->
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">Your profile</h4>	
+										<div class="your-page">
+											<figure>
+												<a href="#" title=""><img src="{% static 'forum/images/resources/friend-avatar9.jpg' %}" alt=""></a>
+											</figure>
+											<div class="page-meta">
+												<a href="#" title="" class="underline">{{ user.username }}</a>
+												<span><i class="ti-envelope"></i><a href="#" title="">Posts <em>{{ user_posts_count }}</em></a></span>
+												<span><i class="ti-comment"></i><a href="#" title="">Replies <em>{{ user_replies_count }}</em></a></span>
+											</div>
+											<div class="page-likes">
+												<ul class="nav nav-tabs likes-btn">
+													<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">posts</a></li>
+													 <li class="nav-item"><a class="" href="#link2" data-toggle="tab">replies</a></li>
+												</ul>
+												<!-- Tab panes -->
+												<div class="tab-content">
+												  <div class="tab-pane active fade show " id="link1" >
+													<span><i class="ti-envelope"></i>884</span>
+													  <a href="#" title="weekly-likes">Some people who've replied</a>
+													  <div class="users-thumb-list">
+														<a href="#" title="Anderw" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-1.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="frank" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-2.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="Sara" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-3.jpg' %}" alt="">  
+														</a>
+													  </div>
+												  </div>
+												  <div class="tab-pane fade" id="link2" >
+													  <span><i class="ti-comments-smiley"></i>440</span>
+													  <a href="#" title="weekly-likes">Some people you've replied to</a>
+													  <div class="users-thumb-list">
+														<a href="#" title="Anderw" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-1.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="frank" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-2.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="Sara" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-3.jpg' %}" alt="">  
+														</a>
+													  </div>
+												  </div>
+												</div>
+											</div>
+										</div>
+									</div><!-- page like widget -->
+								</aside>
+							</div><!-- sidebar -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+	<script>
+		let postTitle = document.getElementById('id_post_title');
+		let postText = document.getElementById('id_post_text');
+
+		postTitle.placeholder = "Post title";
+		postTitle.className = "form-control";
+
+		postText.placeholder = "Post text";
+		postText.className = "form-control";
+	</script>
+
+	{% endblock content %}
+
+
+	<!-- 
+		<div class="central-meta item">
+									<div class="user-post">
+										<div class="friend-info">
+											<figure>
+												<img alt="" src="images/resources/friend-avatar10.jpg">
+											</figure>
+											<div class="friend-name">
+												<ins><a title="" href="time-line.html">Janice Griffith</a></ins>
+												<span>published: june,2 2018 19:PM</span>
+											</div>
+											<div class="description">
+													
+													<p>
+														The post to show a summary of linkage to an external website
+													</p>
+												</div>
+											<div class="post-meta">
+												<div class="linked-image align-left">
+													<a title="" href="#"><img alt="" src="{% static 'forum/images/resources/page1.jpg' %}"></a>
+												</div>
+												<div class="detail">
+													<span>Gomma site - very chill</span>
+													<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
+													<a title="" href="#">www.sample.com</a>
+												</div>		
+												<div class="we-video-info">
+													<ul>
+														<li>
+															<span class="views" data-toggle="tooltip" title="views">
+																<i class="fa fa-eye"></i>
+																<ins>1.2k</ins>
+															</span>
+														</li>
+														<li>
+															<span class="comment" data-toggle="tooltip" title="Replies">
+																<i class="fa fa-comments-o"></i>
+																<ins>52</ins>
+															</span>
+														</li>
+														<li>
+															<span class="like" data-toggle="tooltip" title="like">
+																<i class="ti-heart"></i>
+																<ins>2.2k</ins>
+															</span>
+														</li>
+														<li>
+															<span class="dislike" data-toggle="tooltip" title="dislike">
+																<i class="ti-heart-broken"></i>
+																<ins>200</ins>
+															</span>
+														</li> -->
+														<!-- <li class="social-media">
+															<div class="menu">
+															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																</div>
+															  </div>
+																<div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
+																</div>
+															  </div>
+															  <div class="rotater">
+																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
+																</div>
+															  </div>
+
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+	 -->
