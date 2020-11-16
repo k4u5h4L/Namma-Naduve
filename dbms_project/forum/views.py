@@ -141,8 +141,6 @@ def create_post(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.tags = form.cleaned_data.get('tags')
-            print(post.tags)
             post.save()
 
             post_title = form.cleaned_data.get('post_title')
