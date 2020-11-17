@@ -112,23 +112,27 @@
 								<div class="gap-60 no-gap">
 									<h4 class="comment-title">Leave a Comment</h4>
 									<div class="contact-form">
-										<form method="post">
-											<div class="form-group">	
-											  <input type="text" id="input" required="required"/>
+										
+										<form method="post" action="/create/reply/{{ post.id }}">
+											{% csrf_token %}
+											<!-- <div class="form-group">	
+											  <input type="text" id="input" />
 											  <label class="control-label" for="input">First & Last Name</label><i class="mtrl-select"></i>
 											</div>
 											
 											<div class="form-group">	
 											  <input type="text" required="required"/>
 											  <label class="control-label" for="input">Subject</label><i class="mtrl-select"></i>
-											</div>
-											
+											</div> -->
 											<div class="form-group">	
-											  <textarea rows="4" id="textarea" required="required"></textarea>
-											  <label class="control-label" for="textarea">Message</label><i class="mtrl-select"></i>
+											  <!-- <textarea rows="4" id="textarea" ></textarea> -->
+											  {{ reply_form.reply_text }}
+											  <!-- <label class="control-label" for="textarea">Message</label><i class="mtrl-select"></i> -->
+											
+											<label class="control-label" ></label><i class="mtrl-select"></i>
 											</div>
 											<div class="submit-btns">
-												<button class="mtr-btn signup" type="button"><i>Submit</i></button>
+												<button  type="submit">Submit</button>
 											</div>
 										</form>
 									</div>

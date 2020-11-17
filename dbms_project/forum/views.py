@@ -116,6 +116,8 @@ def profile_about_page(request, usr_name):
 @login_required
 def post_page(request, post_id):
     # print(post_id)
+    reply_form = ReplyForm()
+
     try:
         post = Post.objects.get(id=post_id)
     except Post.DoesNotExist:
@@ -128,6 +130,7 @@ def post_page(request, post_id):
         'post': post,
         'replies': replies,
         'tags': tags,
+        'reply_form':reply_form,
     }
     # print(context)
     return render(request, 'forum/post.html', context)
@@ -179,7 +182,7 @@ def create_post(request):
 
 @login_required
 def create_reply(request, post_id):
-
+    
     try:
         post = Post.objects.get(id=post_id)
     except Post.DoesNotExist:

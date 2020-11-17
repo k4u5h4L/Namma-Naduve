@@ -246,14 +246,17 @@
 													<div class="comet-avatar">
 														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
 													</div>
-													<div class="post-comt-box">
+													
 														<form method="post" action="/create/reply/{{ post.post.id }}">
 															{% csrf_token %}
+															<div class="post-comt-box">
 															<!-- <textarea placeholder="Post your comment"></textarea> -->
 															{{ reply_form.reply_text }}
-															<button type="submit"></button>
+															</div>
+															<br>
+															<br>
+															<button type="submit">Post</button>
 														</form>
-													</div>
 												</li>
 											</ul>
 										</div>
