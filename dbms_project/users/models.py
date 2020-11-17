@@ -31,7 +31,7 @@ class CustomUser(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE, blank=True)
+        CustomUser, on_delete=models.CASCADE)
     location = models.CharField(max_length=100, null=True, blank=True)
     phone_no = models.CharField(max_length=14, null=True, blank=True)
     personal_site = models.CharField(max_length=60, null=True, blank=True)
