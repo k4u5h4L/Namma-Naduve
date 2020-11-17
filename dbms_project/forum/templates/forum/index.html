@@ -112,7 +112,7 @@
 								<div class="central-meta">
 									<div class="new-postbox">
 										<figure>
-											<img src="{% static 'forum/images/resources/admin2.jpg' %}" alt="">
+											<img src="{{ user.profile.image.url }}" alt="profile pic">
 										</figure>
 										<div class="newpst-input">
 											<form method="POST" action="/create/post/">
@@ -167,7 +167,7 @@
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img src="{% static 'forum/images/resources/friend-avatar10.jpg' %}" alt="">
+												<img src="{{ post.post.author.profile.image.url }}" alt="">
 											</figure>
 											<div class="friend-name">
 												<ins><a href="{% url 'profile_page' post.post.author.username %}" title="">{{ post.post.author }}</a></ins>
@@ -223,7 +223,7 @@
 												{% for reply in post.replies %}
 												<li>
 													<div class="comet-avatar">
-														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
+														<img src="{{ reply.author.profile.image.url }}" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
@@ -241,22 +241,26 @@
 												<li>
 													<a href="{% url 'post_page' post.post.id %}" title="" class="showmore underline">more comments</a>
 												</li>
+												{% else %}
+												<li>
+													<a class="showmore underline"><h6>No replies</h6></a>
+												</li>
 												{% endif %}
 												<li class="post-comment">
 													<div class="comet-avatar">
-														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
+														<img src="{{ user.profile.image.url }}" alt="">
 													</div>
 													
+													<div class="post-comt-box">
 														<form method="post" action="/create/reply/{{ post.post.id }}">
 															{% csrf_token %}
-															<div class="post-comt-box">
 															<!-- <textarea placeholder="Post your comment"></textarea> -->
 															{{ reply_form.reply_text }}
-															</div>
-															<br>
-															<br>
-															<button type="submit">Post</button>
+															<!-- <br> -->
+															<!-- <br> -->
+															<button type="submit"></button>
 														</form>
+													</div>
 												</li>
 											</ul>
 										</div>

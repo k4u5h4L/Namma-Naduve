@@ -46,6 +46,7 @@
 									</ul>
 								</div>
 							-->
+							{% if user.is_athenticated %}
 								<div class="widget stick-widget">
 									<h4 class="widget-title">Quick Navigation</h4>
 										<ul class="naves">
@@ -55,7 +56,7 @@
 											</li>
 											<li>
 												<i class="ti-user"></i>
-												<a href="profile.html" title="">Profile</a>
+												<a href="{% url 'profile_page' user.username %}" title="">Profile</a>
 											</li>
 											<li>
 												<i class="ti-power-off"></i>
@@ -63,6 +64,7 @@
 											</li>
 										</ul>
 								</div><!-- Shortcuts -->
+							{% endif %}
 							</aside>	
 						</div>
 						<div class="col-lg-9">
