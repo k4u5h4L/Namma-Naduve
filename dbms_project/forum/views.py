@@ -3,6 +3,7 @@ from django.views.defaults import page_not_found
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage
 
 from .models import Post, Reply, Tag, CustomUser
 from .filters import PostFilter
@@ -19,12 +20,27 @@ def home_page(request):
     reply_form = ReplyForm()
 
     posts = Post.objects.all().order_by('-post_timestamp')
-    posts_count = posts.count()
+
+    paginate = Paginator(posts, 5)
+    # the paginator object takes in the full posts query, and the amount of posts per page
+
+    page_num = request.GET.get('page', 1)
+
+    try:
+        page = paginate.page(page_num)
+    except EmptyPage:
+        page = paginate.page(1)
+
+    posts = page
+    # print(posts.has_next)
+
+    # posts_count = posts.count()
 
     context = {
-        'posts_count': posts_count,
+        # 'posts_count': posts_count,
         'post_form': post_form,
         'reply_form': reply_form,
+        'page_obj': page,
     }
 
     replies = []

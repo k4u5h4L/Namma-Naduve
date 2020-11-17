@@ -1,6 +1,18 @@
 {% extends "forum/base/base.html" %}
 {% load static %}
+
+{% block strip_css %}
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+{% endblock strip_css %}
+
 {% block content %}
+
+	<div class="d-flex d-none position-fixed" style="top:35vh;left:46vw">
+		<button class="btn btn-primary loading">
+			<span class="spinner-border spinner-border-sm"></span>
+			Loading....
+		</button>
+	</div>
 		
 	<section>
 		<div class="gap gray-bg">
@@ -149,9 +161,9 @@
 										</div>
 									</div>
 								</div><!-- add post new box -->
-								<div class="loadMore">
+								<div class="infinite-container">
 								{% for post in posts %}
-								<div class="central-meta item">
+								<div class="central-meta item infinite-item">
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
@@ -250,6 +262,10 @@
 								{% endfor %}
 								
 								</div>
+
+								{% if page_obj.has_next %}
+								<a class="infinite-more-link" href="{% url 'home_page' %}?page={{ page_obj.next_page_number }}">next</a>
+								{% endif %}
 							</div>
 							<!-- centerl meta -->
 							<div class="col-lg-3">
@@ -333,96 +349,34 @@
 
 	{% endblock content %}
 
+	{% block strip_js %}
+	<script src="{% static 'forum/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'forum/js/infinite.min.js' %}"></script>
 
-	<!-- 
-		<div class="central-meta item">
-									<div class="user-post">
-										<div class="friend-info">
-											<figure>
-												<img alt="" src="images/resources/friend-avatar10.jpg">
-											</figure>
-											<div class="friend-name">
-												<ins><a title="" href="time-line.html">Janice Griffith</a></ins>
-												<span>published: june,2 2018 19:PM</span>
-											</div>
-											<div class="description">
-													
-													<p>
-														The post to show a summary of linkage to an external website
-													</p>
-												</div>
-											<div class="post-meta">
-												<div class="linked-image align-left">
-													<a title="" href="#"><img alt="" src="{% static 'forum/images/resources/page1.jpg' %}"></a>
-												</div>
-												<div class="detail">
-													<span>Gomma site - very chill</span>
-													<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
-													<a title="" href="#">www.sample.com</a>
-												</div>		
-												<div class="we-video-info">
-													<ul>
-														<li>
-															<span class="views" data-toggle="tooltip" title="views">
-																<i class="fa fa-eye"></i>
-																<ins>1.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="comment" data-toggle="tooltip" title="Replies">
-																<i class="fa fa-comments-o"></i>
-																<ins>52</ins>
-															</span>
-														</li>
-														<li>
-															<span class="like" data-toggle="tooltip" title="like">
-																<i class="ti-heart"></i>
-																<ins>2.2k</ins>
-															</span>
-														</li>
-														<li>
-															<span class="dislike" data-toggle="tooltip" title="dislike">
-																<i class="ti-heart-broken"></i>
-																<ins>200</ins>
-															</span>
-														</li> -->
-														<!-- <li class="social-media">
-															<div class="menu">
-															  <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																</div>
-															  </div>
-																<div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																</div>
-															  </div>
-															  <div class="rotater">
-																<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																</div>
-															  </div>
+	<script>
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container'),
 
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-	 -->
+            offset: 'bottom-in-view',
+
+            onBeforePageLoad: function () {
+                $('.loading').show();
+            },
+            onAfterPageLoad: function () {
+                $('.loading').hide();
+
+				postTitle.placeholder = "Post title";
+				postTitle.className = "form-control";
+
+				postText.placeholder = "Post text";
+				postText.className = "form-control";
+
+				for (let i in replyText) {
+				replyText[i].placeholder = "Send a reply";
+				replyText[i].className += "form-control";
+		}
+            }
+
+        });
+    </script>
+	{% endblock strip_js %}
