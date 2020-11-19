@@ -11,6 +11,7 @@ urlpatterns = [
     path('user/about/<str:usr_name>/',
          views.profile_about_page, name='profile_about_page'),
     path('user/<str:usr_name>/', views.profile_page, name='profile_page'),
+    path('delete/<int:post_id>',views.delete_post,name='delete'),
     path('faq/', views.faq_page, name='faq_page'),
     path('', views.home_page, name='home_page'),
 ]

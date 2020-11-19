@@ -154,13 +154,25 @@
 											<img src="{% static 'forum/images/resources/admin2.jpg' %}" alt="">
 										</figure>
 										<div class="newpst-input">
-											<form method="post">
+											<form method="post" action='/create/post/'>
+												{% csrf_token %}
+
+												<!-- {{ post_form.post_title }} -->
+												<br>
+												<br>
+												<!-- {{ post_form.post_text }} -->
+												<br>
+												<br>
+												
 												<div>
-													<textarea rows="1" placeholder="post title"></textarea>
+													<textarea type="text" name="post_title" maxlength="100" required="" id="id_post_title" rows="1" placeholder="post title"></textarea>
 												</div>
 												<div>
-													<textarea rows="2" placeholder="post a query"></textarea>
-												</div>												
+													<textarea type="text" name="post_text" maxlength="100" required="" id="id_post_text" rows="2" placeholder="post a query"></textarea>
+												</div>	
+												<div>
+													{{ post_form.tags }}
+												</div>											
 												<div class="attachments">
 													<ul>
 														<!-- <li>
@@ -209,6 +221,8 @@
 												</figure>
 												<div class="friend-name">
 													<ins><a href="time-line.html" title="">{{ post.post.author }}</a></ins>
+													
+													
 													<span>published: {{ post.post.post_timestamp }}</span>
 												</div>
 												<div class="post-meta">
@@ -217,13 +231,16 @@
 														<div class="post-meta">
 															<div class="detail">
 																<span>{{ post.post.post_title }}</span>
+																
 															</div>	
 														</div>
 														<div class="description">
 															<p>
 																{{ post.post.post_text }}
 															</p>
+															
 														</div>
+
 														<div class="we-video-info">
 															<ul>
 																<!-- <li>
@@ -288,6 +305,13 @@
 													</a>
 												</div>
 											</div>
+											{{ username }}
+											<form method="POST" action="/delete/{{ post.post.id }}" >
+												{% csrf_token %}
+												
+												<button type="submit">Delete</button>
+
+											</form> 
 											<div class="coment-area">
 												<ul class="we-comet">
 													{% for reply in post.replies %}
@@ -304,7 +328,7 @@
 															<p>{{ reply.reply_text }}</p>
 														</div>
 													</li>
-	
+													
 													{% endfor %}
 					
 													{% if post.replies|length != 0 %}
@@ -312,7 +336,7 @@
 														<a href="{% url 'post_page' post.post.id %}" title="" class="showmore underline">more comments</a>
 													</li>
 													{% endif %}
-													<li class="post-comment">
+													<!-- <li class="post-comment">
 														<div class="comet-avatar">
 															<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
 														</div>
@@ -322,7 +346,7 @@
 																<button type="submit"></button>
 															</form>
 														</div>
-													</li>
+													</li> -->
 												</ul>
 											</div>
 										</div>

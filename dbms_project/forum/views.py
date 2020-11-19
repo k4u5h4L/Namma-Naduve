@@ -9,12 +9,13 @@ from .models import Post, Reply, Tag, CustomUser
 from .filters import PostFilter
 
 from .forms import PostForm, ReplyForm
-
+ 
 
 # Create your views here.
 
 @login_required
 def home_page(request):
+    name=request.user
 
     post_form = PostForm()
     reply_form = ReplyForm()
@@ -69,16 +70,20 @@ def home_page(request):
 
 @login_required
 def profile_page(request, usr_name):
+    
     try:
         user_page = CustomUser.objects.get(username=usr_name)
     except CustomUser.DoesNotExist:
         raise Http404("No CustomUser matches the given query.")
 
     posts = Post.objects.filter(author=user_page)
+    post_form = PostForm()
     # print(posts)
 
     context = {
         'user_page': user_page,
+        'post_form': post_form,
+        'username': usr_name,
         # 'user_posts': posts,
     }
 
@@ -107,7 +112,19 @@ def profile_page(request, usr_name):
 
 
 @login_required
+def delete_post(request,post_id=None):
+    val=None
+    user=request.user
+    Post.objects.filter(id=post_id).delete()
+    # post_to_delete=Post.objects.get(id=post_id)
+    # print(post_to_delete)
+    # post_to_delete.delete()
+    return redirect('profile_page',user)
+
+
+@login_required
 def profile_about_page(request, usr_name):
+    val=None
     print(usr_name)
     # fetch user with the username variable and display that to user
     return render(request, 'forum/about.html', context)
@@ -115,6 +132,7 @@ def profile_about_page(request, usr_name):
 
 @login_required
 def post_page(request, post_id):
+    val=None
     # print(post_id)
     reply_form = ReplyForm()
 
