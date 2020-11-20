@@ -3,6 +3,11 @@ from django.db import models
 
 # Create your models here.
 
+CHOICES = (
+    ('S', 'student'),
+    ('T', 'teacher')
+)
+
 
 class CustomUser(AbstractUser):
     #first_name = models.CharField(max_length=50)
@@ -37,6 +42,7 @@ class Profile(models.Model):
     personal_site = models.CharField(max_length=60, null=True, blank=True)
     bio = models.CharField(max_length=500, null=True, blank=True)
     full_name = models.CharField(max_length=50, null=True, blank=True)
+    t_s = models.CharField(choices=CHOICES, max_length=20)
 
     image = models.ImageField(default='default.png', upload_to='profile_pics')
 

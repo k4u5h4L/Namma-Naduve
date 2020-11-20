@@ -24,3 +24,5 @@ media/*
 static/*
 config/
 .idea/
+venv/
+.vscode/

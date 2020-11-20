@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, ProfileForm
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib import messages
@@ -23,8 +23,12 @@ def landing_page(request):
     else:
 
         form = CustomUserCreationForm()
+        profile_form = ProfileForm()
 
-        context = {'form': form}
+        context = {
+            'form': form,
+            # 'profile_form': profile_form
+        }
 
         return render(request, 'users/landing.html', context)
 
@@ -56,6 +60,8 @@ def register(request):
     if request.method == "POST":
         # print(request.POST)
         form = CustomUserCreationForm(request.POST)
+        t_or_s = request.POST['radio']
+        print(t_or_s)
 
         if form.is_valid():
             form.save()
@@ -69,7 +75,7 @@ def register(request):
             auth_login(request, user)
 
             # Placeholder code to create a Profile instance as Django signals aren't working
-            profile = Profile(user=request.user)
+            profile = Profile(user=request.user, t_s=t_or_s)
             profile.save()
 
             return redirect('home_page')
