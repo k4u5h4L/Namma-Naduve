@@ -311,13 +311,14 @@
 													</a>
 												</div>
 											</div>
-											{{ username }}
+											{% if user == user_page %}
 											<form method="POST" action="/delete/{{ post.post.id }}" >
 												{% csrf_token %}
 												
 												<button type="submit">Delete</button>
 
 											</form> 
+											{% endif %}
 											<div class="coment-area">
 												<ul class="we-comet">
 													{% for reply in post.replies %}
