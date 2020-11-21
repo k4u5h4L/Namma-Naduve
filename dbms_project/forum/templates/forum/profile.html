@@ -8,7 +8,13 @@
 			<figure><img id="coverImg" alt="cover pic" /></figure>
 			<div class="add-btn">
 				<span>Is currently a </span>
-				<a style="color: white;cursor: default;" title="" data-ripple="">Student</a>
+				<a style="color: white;cursor: default;" title="" data-ripple="">
+				{% if user_page.profile.t_s == "T" %}
+				Teacher
+				{% else %}
+				Student
+				{% endif %}
+				</a>
 			</div>
 			<!-- <form class="edit-phto">
 				<i class="fa fa-camera-retro"></i>
@@ -22,7 +28,7 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="{{ user.profile.image.url }}" alt="profile pic">
+								<img src="{{ user_page.profile.image.url }}" alt="profile pic">
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -384,7 +390,7 @@
 													 <li class="nav-item"><a class="" href="#link2" data-toggle="tab">replies</a></li>
 												</ul>
 												<!-- Tab panes -->
-												<div class="tab-content">
+												<!-- <div class="tab-content">
 												  <div class="tab-pane active fade show " id="link1" >
 													<span><i class="ti-envelope"></i>884</span>
 													  <a href="#" title="weekly-likes">Some people who've replied</a>
@@ -415,7 +421,7 @@
 														</a>
 													  </div>
 												  </div>
-												</div>
+												</div> -->
 											</div>
 										</div>
 									</div><!-- page like widget -->
