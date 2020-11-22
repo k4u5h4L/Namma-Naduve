@@ -134,3 +134,10 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_URL = 'landing_page'
 LOGIN_REDIRECT_URL = 'home_page'
 LOGOUT_REDIRECT_URL = 'landing_page'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('USR')
+EMAIL_HOST_PASSWORD = os.environ.get('PASSWORD')
+EMAIL_USE_TLS = True

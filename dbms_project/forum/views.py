@@ -153,7 +153,7 @@ def post_page(request, post_id):
     # print(context)
     return render(request, 'forum/post.html', context)
 
-
+ 
 @login_required
 def search_results(request):
     # print(query)
@@ -224,7 +224,7 @@ def create_reply(request, post_id):
             messages.error(
                 request, f'Form is not validated')
 
-        return redirect('home_page')
+        return redirect('post_page',post_id)
     else:
         # print("A GET req was made")
         return redirect('home_page')

@@ -86,3 +86,13 @@ def register(request):
             return redirect('landing_page')
 
     return redirect('home_page')
+
+
+# def password_reset(request):
+#     form= CustomUserCreationForm()
+#     print(request.method)
+#     context={
+#         'form': form,
+#     }
+#     return render(request,'users/reset.html',context)
+
