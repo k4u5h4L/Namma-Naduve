@@ -26,3 +26,4 @@ config/
 .idea/
 venv/
 .vscode/
+dbms_project/dbms_project/config.json

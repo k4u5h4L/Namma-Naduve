@@ -41,7 +41,9 @@
 						{% if messages %}
 							{% for message in messages %}
 								<div class="alert alert-{{ message.tags }}">
-									{{ message }}
+									<!-- <button class="btn danger"> -->
+										{{ message }}
+									<!-- </button> -->
 								</div>
 							{% endfor %}
 						{% endif %}
@@ -70,9 +72,11 @@
 							  </label>
 							</div> -->
 							<div>
-							
-								<input value="Forgot Password?" form="resetform" type="submit"></input>
-							
+							<br>
+							<div class="align-right">
+								<input value="Forgot Password?" class="form-control" style="width: 170px;" form="resetform" type="submit"></input>
+							</div>
+
 						</div>
 							<div class="submit-btns">
 								<div class="align-left">

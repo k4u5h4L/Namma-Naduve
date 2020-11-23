@@ -37,7 +37,7 @@
 		<div class="mh-head second">
 			<!-- <form class="mh-form"> -->
 				<!-- <input placeholder="search" /> -->
-				<a href="url 'search_results'" onclick="window.location.href = `{% url 'search_results' %}`" class="fa fa-search"></a>
+				<a href="{% url 'search_results' %}" onclick="window.location.href = `{% url 'search_results' %}`" class="fa fa-search"></a>
 			<!-- </form> -->
 		</div>
 		<nav id="menu" class="res-menu">
@@ -433,7 +433,7 @@
 					<!-- <a href="#" title=""><span class="status f-online"></span>online</a>
 					<a href="#" title=""><span class="status f-away"></span>away</a>
 					<a href="#" title=""><span class="status f-off"></span>offline</a> -->
-					<a href="{% url 'profile_page' user.username %}" title=""><i class="ti-user"></i> view profile</a>
+					<a href="{% url 'profile_page' user.username %}" onclick="window.location.href = `{% url 'profile_page' user.username %}`" title=""><i class="ti-user"></i> view profile</a>
 					<!-- <a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
 					<a href="#" title=""><i class="ti-target"></i>activity log</a>
 					<a href="#" title=""><i class="ti-settings"></i>account setting</a> -->

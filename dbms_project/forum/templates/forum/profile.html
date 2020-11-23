@@ -29,6 +29,7 @@
 						<div class="user-avatar">
 							<figure>
 								<img src="{{ user_page.profile.image.url }}" alt="profile pic">
+								{% if user == user_page %}
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
@@ -36,6 +37,7 @@
 										<input type="file"/>
 									</label>
 								</form>
+								{% endif %}
 							</figure>
 						</div>
 					</div>
@@ -157,18 +159,14 @@
 								<div class="central-meta">
 									<div class="new-postbox">
 										<figure>
-											<img src="{% static 'forum/images/resources/admin2.jpg' %}" alt="">
+											<img src="{{ user.profile.image.url }}" alt="">
 										</figure>
 										<div class="newpst-input">
 											<form method="post" action='/create/post/'>
 												{% csrf_token %}
 
 												<!-- {{ post_form.post_title }} -->
-												<br>
-												<br>
 												<!-- {{ post_form.post_text }} -->
-												<br>
-												<br>
 												
 												<div>
 													<textarea type="text" name="post_title" maxlength="100" required="" id="id_post_title" rows="1" placeholder="post title"></textarea>

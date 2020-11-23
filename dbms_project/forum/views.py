@@ -126,6 +126,7 @@ def delete_post(request,post_id=None):
 def profile_about_page(request, usr_name):
     val=None
     print(usr_name)
+    context = {}
     # fetch user with the username variable and display that to user
     return render(request, 'forum/about.html', context)
 
