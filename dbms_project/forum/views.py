@@ -125,8 +125,14 @@ def delete_post(request,post_id=None):
 @login_required
 def profile_about_page(request, usr_name):
     val=None
-    print(usr_name)
-    context = {}
+    # print(usr_name)
+    try:
+        user_page = CustomUser.objects.get(username=usr_name)
+    except CustomUser.DoesNotExist:
+        raise Http404("No CustomUser matches the given query.")
+    context = {
+        'user_page': user_page,
+    }
     # fetch user with the username variable and display that to user
     return render(request, 'forum/about.html', context)
 

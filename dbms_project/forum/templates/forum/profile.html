@@ -49,8 +49,8 @@
 								  <!-- <span>Group Admin</span> -->
 								</li>
 								<li>
-									<a class="active" href="#" title="" data-ripple="">Overview</a>
-									<a class="" href="about.html" title="" data-ripple="">about</a>
+									<a class="active" href="{% url 'profile_page' user_page.username %}" title="" data-ripple="">Overview</a>
+									<a class="" href="{% url 'profile_about_page' user_page.username %}" title="" data-ripple="">about</a>
 								</li>
 							</ul>
 						</div>
