@@ -50,7 +50,10 @@
 								</li>
 								<li>
 									<a class="" href="{% url 'profile_page' user_page.username %}" title="" data-ripple="">Overview</a>
-									<a class="active" href="{% url 'profile_about_page' user_page.username %}" title="" data-ripple="">about</a>
+									<a class="active" href="{% url 'profile_about_page' user_page.username %}" title="" data-ripple="">About</a>
+									{% if user == user_page %}
+									<a class="" href="{% url 'profile_update_page' user_page.username %}" title="" data-ripple="">Update</a>
+									{% endif %}
 								</li>
 							</ul>
 						</div>
@@ -162,7 +165,7 @@
 										<div class="personal">
 											<h5 class="f-title"><i class="ti-info-alt"></i> Personal Info</h5>
 											<p>
-												Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+												{{ user_page.profile.bio }}
 											</p>
 										</div>
 										<div class="d-flex flex-row mt-2">
@@ -186,11 +189,11 @@
 											<div class="tab-content">
 												<div class="tab-pane fade show active" id="basic" >
 													<ul class="basics">
-														<li><i class="ti-user"></i>sarah grey</li>
-														<li><i class="ti-map-alt"></i>live in Dubai</li>
-														<li><i class="ti-mobile"></i>+1-234-345675</li>
-														<li><i class="ti-email"></i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c4553494e515d55507c59515d5550125f5351">[email&#160;protected]</a></li>
-														<li><i class="ti-world"></i>www.yoursite.com</li>
+														<li><i class="ti-user"></i>{{ user_page.profile.full_name }}</li>
+														<li><i class="ti-map-alt"></i>{{ user_page.profile.location }}</li>
+														<li><i class="ti-mobile"></i>{{ user_page.profile.ph_no }}</li>
+														<li><i class="ti-email"></i><a href="mailto:{{ user_page.email }}">{{ user_page.email }}</a></li>
+														<li><i class="ti-world"></i><a href="{{ user_page.profile.personal_site }}">{{ user_page.profile.personal_site }}</a></li>
 													</ul>
 												</div>
 												<!-- <div class="tab-pane fade" id="location" role="tabpanel">
@@ -226,9 +229,11 @@
 											</div>
 										</div>
 									</div>
+									{% if user == user_page %}
 									<div class="submit-btns">
-										<button type="button" class="mtr-btn"><span>Update</span></button>
+										<button type="button" onclick="window.location.href = `{% url 'profile_update_page' user.username %}`" class="mtr-btn"><span>Update</span></button>
 									</div>
+									{% endif %}
 								</div>	
 								<!-- this line -->
 							</div>

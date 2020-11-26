@@ -130,27 +130,56 @@ def profile_about_page(request, usr_name):
         user_page = CustomUser.objects.get(username=usr_name)
     except CustomUser.DoesNotExist:
         raise Http404("No CustomUser matches the given query.")
+
+    user_posts_count = Post.objects.filter(author=request.user).count()
+    user_replies_count = Reply.objects.filter(author=request.user).count()
+
     context = {
         'user_page': user_page,
+        'user_replies_count': user_replies_count,
+        'user_posts_count': user_posts_count,
     }
     # fetch user with the username variable and display that to user
     return render(request, 'forum/about.html', context)
 
 @login_required
 def profile_update_page(request, usr_name):
-    
     if request.method == 'POST':
-       u_form = ProfileUpdateForm(request.POST, instance=request.user)
+        profile = request.user.profile
+        u_form = ProfileUpdateForm(request.POST, instance=profile)
+        print(u_form)
+        t_or_s = request.POST['radio']
 
-       if u_form.is_valid():
-           u_form.save()
-           messages.success(request, f'Your account has been Updated ')
-           return redirect('home_page')
+        if u_form.is_valid():
+            u_form.save()
+            # profile_update_form_submitted = u_form.save()
+            # profile_update_form_submitted.user = request.user
+            # profile_update_form_submitted.save()
+            
+            print(f'Your account has been Updated')
+            messages.success(request, f'Your account has been Updated')
+            return ('profile_about_page', usr_name)
+        else:
+            print("form was not validated")
+            return redirect('profile_about_page', usr_name)
     else:
-          hello  
-    # fetch user with the username variable and display that to user
-    return render (request, 'forum/update_profile.html', context)
+        try:
+            user_page = CustomUser.objects.get(username=usr_name)
+        except CustomUser.DoesNotExist:
+            raise Http404("No CustomUser matches the given query.")
 
+        profile_update_form = ProfileUpdateForm()
+        
+        user_posts_count = Post.objects.filter(author=request.user).count()
+        user_replies_count = Reply.objects.filter(author=request.user).count()
+
+        context = {
+            'user_page': user_page,
+            'profile_update_form': profile_update_form,
+            'user_replies_count': user_replies_count,
+            'user_posts_count': user_posts_count,
+        }
+        return render (request, 'forum/update_profile.html', context)
 
 @login_required
 def post_page(request, post_id):
