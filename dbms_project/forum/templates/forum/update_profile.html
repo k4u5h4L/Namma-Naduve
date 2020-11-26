@@ -30,12 +30,17 @@
 							<figure>
 								<img src="{{ user_page.profile.image.url }}" alt="profile pic">
 								{% if user == user_page %}
-								<form class="edit-phto">
+								<form class="edit-phto" id="profilePicForm" method="POST" enctype="multipart/form-data" action="/user/{{ user.username }}/update/pic/">
 									<i class="fa fa-camera-retro"></i>
+									{% csrf_token %}
+
 									<label class="fileContainer">
 										Edit Profile Pic
-										<input type="file"/>
+										<input type="file" name="image" accept="image/*" id="id_image"/>
 									</label>
+
+
+									<!-- <button type="submit">upload</button> -->
 								</form>
 								{% endif %}
 							</figure>
@@ -471,6 +476,11 @@
 		coverImage.src = coverImages[Math.floor(Math.random() * coverImages.length)];
 		
 		coverImage.style.height = "520px";
+
+		// automatic profile pic submission on upload
+		document.getElementById("id_image").onchange = () => {
+		document.getElementById("profilePicForm").submit();
+		};
 	</script>
 
 	{% endblock content %}
