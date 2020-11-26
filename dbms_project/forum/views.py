@@ -147,18 +147,17 @@ def profile_update_page(request, usr_name):
     if request.method == 'POST':
         profile = request.user.profile
         u_form = ProfileUpdateForm(request.POST, instance=profile)
-        print(u_form)
         t_or_s = request.POST['radio']
 
         if u_form.is_valid():
-            u_form.save()
-            # profile_update_form_submitted = u_form.save()
-            # profile_update_form_submitted.user = request.user
-            # profile_update_form_submitted.save()
+            # u_form.save()
+            profile_update_form_submitted = u_form.save(commit=False)
+            profile_update_form_submitted.t_s = t_or_s
+            profile_update_form_submitted.save()
             
             print(f'Your account has been Updated')
             messages.success(request, f'Your account has been Updated')
-            return ('profile_about_page', usr_name)
+            return redirect('profile_about_page', usr_name)
         else:
             print("form was not validated")
             return redirect('profile_about_page', usr_name)
