@@ -4,11 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage
+from django.conf import settings
+
+import os
 
 from .models import Post, Reply, Tag, CustomUser
 from .filters import PostFilter
 
-from .forms import PostForm, ReplyForm, ProfileUpdateForm
+from .forms import PostForm, ReplyForm, ProfileUpdateForm, ProfilePicUpdateForm
  
 
 # Create your views here.
@@ -78,11 +81,13 @@ def profile_page(request, usr_name):
 
     posts = Post.objects.filter(author=user_page)
     post_form = PostForm()
+    reply_form = ReplyForm()
     # print(posts)
 
     context = {
         'user_page': user_page,
         'post_form': post_form,
+        'reply_form': reply_form,
         'username': usr_name,
         # 'user_posts': posts,
     }
@@ -159,7 +164,7 @@ def profile_update_page(request, usr_name):
             messages.success(request, f'Your account has been Updated')
             return redirect('profile_about_page', usr_name)
         else:
-            print("form was not validated")
+            print("Form was not validated")
             return redirect('profile_about_page', usr_name)
     else:
         try:
@@ -180,6 +185,27 @@ def profile_update_page(request, usr_name):
         }
         return render (request, 'forum/update_profile.html', context)
 
+@login_required
+def profile_picture_page(request, usr_name):
+    if request.method == 'POST':
+        # removes the old profile pic before updating the new one
+        os.remove(f'{settings.BASE_DIR}/{request.user.profile.image.url}')
+        print(f'Old profile pic has been deleted')
+
+        pic_form = ProfilePicUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if pic_form.is_valid():
+            # print(request.user.profile.image.url)
+            pic_form.save()
+            print(f'Your profile pic has been Updated')
+            messages.success(request, f'Your Profile Picture has been Updated')
+            return redirect('profile_about_page', usr_name)
+        else:
+            print("Form was not validated")
+            return redirect('profile_about_page', usr_name)
+    else:
+        return redirect('profile_about_page', usr_name)
+        
 @login_required
 def post_page(request, post_id):
     val=None

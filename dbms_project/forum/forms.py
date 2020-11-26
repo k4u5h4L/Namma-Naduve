@@ -20,3 +20,8 @@ class ProfileUpdateForm(ModelForm):
     class Meta:
         model = Profile 
         fields = ['full_name','location','phone_no','personal_site', 'bio']
+
+class ProfilePicUpdateForm(ModelForm):
+    class Meta:
+        model = Profile 
+        fields = ['image']
