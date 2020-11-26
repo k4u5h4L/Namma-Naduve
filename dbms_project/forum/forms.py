@@ -1,5 +1,6 @@
 from django.forms import ModelForm, Form
 from .models import Post, Reply
+from users.models import Profile
 
 
 class PostForm(ModelForm):
@@ -14,3 +15,8 @@ class ReplyForm(ModelForm):
         model = Reply
         fields = ['reply_text']
         exclude = ['author', 'parent_post']
+
+class ProfileUpdateForm(ModelForm):
+    class Meta:
+        model = Profile 
+        fields = ['full_name','location','phone_no','personal_site','bio']

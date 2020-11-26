@@ -10,6 +10,8 @@ urlpatterns = [
          views.create_reply, name='create_reply_page'),
     path('user/<str:usr_name>/about/',
          views.profile_about_page, name='profile_about_page'),
+    path('user/<str:usr_name>/update/',
+         views.profile_update_page, name='profile_update_page'),
     path('user/<str:usr_name>/', views.profile_page, name='profile_page'),
     path('delete/<int:post_id>',views.delete_post,name='delete'),
     path('faq/', views.faq_page, name='faq_page'),

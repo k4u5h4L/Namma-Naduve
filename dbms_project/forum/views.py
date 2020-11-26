@@ -8,7 +8,7 @@ from django.core.paginator import Paginator, EmptyPage
 from .models import Post, Reply, Tag, CustomUser
 from .filters import PostFilter
 
-from .forms import PostForm, ReplyForm
+from .forms import PostForm, ReplyForm, ProfileUpdateForm
  
 
 # Create your views here.
@@ -135,6 +135,21 @@ def profile_about_page(request, usr_name):
     }
     # fetch user with the username variable and display that to user
     return render(request, 'forum/about.html', context)
+
+@login_required
+def profile_update_page(request, usr_name):
+    
+    if request.method == 'POST':
+       u_form = ProfileUpdateForm(request.POST, instance=request.user)
+
+       if u_form.is_valid():
+           u_form.save()
+           messages.success(request, f'Your account has been Updated ')
+           return redirect('home_page')
+    else:
+          hello  
+    # fetch user with the username variable and display that to user
+    return render (request, 'forum/update_profile.html', context)
 
 
 @login_required
