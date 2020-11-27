@@ -30,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '*']
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 # Application definition
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'forum',
     'users',
     'django_filters',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

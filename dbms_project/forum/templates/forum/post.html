@@ -15,7 +15,7 @@
 								
 								<div class="post-time">
 									<div class="author-thumb">
-									<img src="{% static 'forum/images/resources/chatlist2.jpg' %}" alt="">
+									<img src="{{ post.author.profile.image.url }}" width="60" alt="" />
 									<span><a href="#" title="">by {{ post.author }}</a></span>
 								</div>
 									<span class="post-date">
@@ -91,7 +91,7 @@
 											<li>
 												<div class="comment-box">
 													<div class="commenter-photo">
-														<img alt="" src="{% static 'forum/images/resources/commenter-1.jpg' %}">
+														<img alt="" src="{{ reply.author.profile.image.url }}"  width=100/>
 													</div>
 													<div class="commenter-meta">
 														<div class="comment-titles">

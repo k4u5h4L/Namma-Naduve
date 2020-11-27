@@ -2,3 +2,4 @@ pipenv
 django
 django-filter
 Pillow
+django-crispy-forms

@@ -4,29 +4,49 @@
 {% block title %}Search{% endblock title %}
 
 {% block strip_css %}<link rel="stylesheet" href="{% static 'forum/css/strip.css' %}">{% endblock strip_css %}
+{% load crispy_forms_tags %}
 {% block content %}
 	
 	<section>
 		<div class="gap gray-bg">
 			<div class="container">
 				<div class="row" id="page-contents">
-					<div class=" col-lg-12">
+					<div class=" col-lg-19">
 						<div class="blog-sec">
 							<div class="post-filter-sec">
 								<form method="GET" class="filter-form">
-									<!-- <input type="post" placeholder="Search post"> -->
-									{{ postFilter.form.post_title }}
-									<!-- <button><i class="ti-search"></i></button> -->
+									{{ postFilter.form|crispy }}
 									<div class="purify">
-										<span>filter by</span>
-										<!-- Tags: -->
-											{{ postFilter.form.tags }}
-										<!-- Post Author: -->
-											{{ postFilter.form.author }}
+										<!-- <span>filter by</span>
+											{{ postFilter.form.tags|as_crispy_field }}
+											{{ postFilter.form.author|as_crispy_field }} -->
 										<button id="filterBtn" class="btn btn-view" type="submit">Filter</button>
 									</div>
 								</form>
 							</div>
+							<!--
+							<div class="post-filter-sec">
+								<form method="post" class="filter-form">
+									<input type="post" placeholder="Search post">
+									<button><i class="ti-search"></i></button>
+								</form>
+								<div class="purify">
+									<span>filter by</span>
+									<select>
+										<option>All categories</option>
+										<option>By Favouirtes</option>
+										<option>By Likes</option>
+									</select>
+									<select>
+										<option>Assending A-Z</option>
+										<option>Desending Z-A</option>
+										<option>Desending (date)</option>
+										<option>Asending (date)</option>
+									</select>
+									<a href="#" title="">purify</a>
+								</div>
+							</div>
+							-->
 							<div class="row">
 								{% for post in posts %}
 								<!-- #################################################################### -->
