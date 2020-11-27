@@ -189,8 +189,11 @@ def profile_update_page(request, usr_name):
 def profile_picture_page(request, usr_name):
     if request.method == 'POST':
         # removes the old profile pic before updating the new one
-        os.remove(f'{settings.BASE_DIR}/{request.user.profile.image.url}')
-        print(f'Old profile pic has been deleted')
+        if request.user.profile.image.url != '/media/default.png':
+            os.remove(f'{settings.BASE_DIR}/{request.user.profile.image.url}')
+            print(f'Old profile pic has been deleted')
+        else:
+            print(f'Updating pic for first time')
 
         pic_form = ProfilePicUpdateForm(request.POST, request.FILES, instance=request.user.profile)
 
