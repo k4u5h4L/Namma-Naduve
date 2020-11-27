@@ -81,6 +81,7 @@
 							{% endfor %}
 					</li>
 				{% endif %}
+				
 				<!-- <li><span>forum</span>
 					<ul>
 						<li><a href="forum.html" title="">Forum Page</a></li>
@@ -242,12 +243,13 @@
 					</ul>
 				</li>
 				{% if messages %}
-					<span>Message: </span>
+							<li><span>Messages:</span>
 							{% for message in messages %}
-								<!-- <div class="alert alert-{{ message.tags }}"> -->
+								<div class="alert alert-{{ message.tags }}">
 									{{ message }}
-								<!-- </div> -->
+								</div>
 							{% endfor %}
+							</li>
 				{% endif %}
 				<!-- <li>
 					<a href="#" title="">account settings</a>
