@@ -3,3 +3,5 @@ django
 django-filter
 Pillow
 django-crispy-forms
+Tensorflow==2.3.0
+numpy
