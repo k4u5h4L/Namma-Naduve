@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 't0tg=#gig0-+j+=wc^2ou%9e42hxwn8(%!id(kb0__8wdjfyc3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # Put debug = False to get the custom 404 error page
 
 ALLOWED_HOSTS = ['*', '127.0.0.1']
@@ -127,6 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "forum/static")
 
 APPEND_SLASH = False
 
