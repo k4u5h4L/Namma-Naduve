@@ -5,6 +5,8 @@ from django.http import Http404
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage
 from django.conf import settings
+from django.views.defaults import page_not_found
+from django.views.defaults import server_error
 
 import os
 
@@ -333,4 +335,7 @@ def faq_page(request):
 
 
 def not_found_page(request, exception):
+    return render(request, 'forum/404.html')
+
+def not_found_page_server(request):
     return render(request, 'forum/404.html')
