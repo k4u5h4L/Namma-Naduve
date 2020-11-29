@@ -12,6 +12,8 @@ from .models import Post, Reply, Tag, CustomUser
 from .filters import PostFilter
 
 from .forms import PostForm, ReplyForm, ProfileUpdateForm, ProfilePicUpdateForm
+
+from .neural_net.toxicity import is_toxic
  
 
 # Create your views here.
@@ -259,10 +261,19 @@ def create_post(request):
         form = PostForm(request.POST)
 
         if form.is_valid():
+            post_title = form.cleaned_data.get('post_title')
+            post_text= form.cleaned_data.get('post_text')
+
+            if_toxic = is_toxic([post_title, post_text])
+
+            if 1.0 in if_toxic:
+                print(f'User post title or post text has toxic content') 
+                messages.error(request, f'Your post title or post text might have toxic content. We request you to change them in order to post.')
+                return redirect('home_page')
+
             post = form.save(commit=False)
             post.author = request.user
             form.save()
-            post_title = form.cleaned_data.get('post_title')
             print(f'Post just posted successfully: {post_title}!')
             messages.success(request, f'Your post was posted successfully')
 
@@ -289,12 +300,20 @@ def create_reply(request, post_id):
         form = ReplyForm(request.POST)
 
         if form.is_valid():
+            reply_text = form.cleaned_data.get('reply_text')
+
+            if_toxic = is_toxic([reply_text])
+
+            if 1.0 in if_toxic:
+                print(f'User reply text has toxic content') 
+                messages.error(request, f'Your reply text might have toxic content. We request you to change them in order to post.')
+                return redirect('home_page')
+
             reply = form.save(commit=False)
             reply.author = request.user
             reply.parent_post = post
             reply.save()
 
-            reply_text = form.cleaned_data.get('reply_text')
             print(f'Reply just saved successfully: {reply_text}!')
             messages.success(request, f'Your reply was posted successfully')
 

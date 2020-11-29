@@ -20,6 +20,22 @@
 </head>
 <body>
 <!-- <div class="se-pre-con"></div> -->
+{% if messages %}
+{% for message in messages %}
+<div class="container-fluid p-0">
+	{% if messages.tags == "error" %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" >
+	{% else %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" >
+	{% endif %}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+{% endif %}
 <div class="theme-layout">
 	
 	<div class="responsive-header">
@@ -72,15 +88,37 @@
 						<li><a href="{% url 'faq_page' %}" title="">FAQ's</a></li>
 					</ul>
 				</li>
-				{% if messages %}
+				<!-- {% if messages %}
 					<li><span>Messages:</span>
 							{% for message in messages %}
+								{% if message.tags == "error" %}
+								<div class="alert alert-danger">
+									{{ message }}
+								</div>
+								{% else %}
 								<div class="alert alert-{{ message.tags }}">
 									{{ message }}
 								</div>
+								{% endif %}
 							{% endfor %}
 					</li>
-				{% endif %}
+
+					{% if message.tags == "error" %}
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					{% else %}
+					<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"></div>
+					{% endif %}
+						{% for message in messages %}								
+							{{ message }}
+						{% endfor %}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+
+				{% endif %} -->
+
+				
 				
 				<!-- <li><span>forum</span>
 					<ul>
@@ -242,15 +280,33 @@
 						<li><a href="{% url 'faq_page' %}" title="">FAQ's</a></li>
 					</ul>
 				</li>
-				{% if messages %}
+				<!-- {% if messages %}
 							<li><span>Messages:</span>
 							{% for message in messages %}
+								{% if message.tags == "error" %}
+								<div class="alert alert-danger">
+									{{ message }}
+								</div>
+								{% else %}
 								<div class="alert alert-{{ message.tags }}">
 									{{ message }}
 								</div>
+								{% endif %}
 							{% endfor %}
-							</li>
-				{% endif %}
+							</li> 
+							{% if message.tags == "error" %}
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					{% else %}
+					<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"></div>
+					{% endif %}
+						{% for message in messages %}								
+							{{ message }}
+						{% endfor %}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+				{% endif %} -->
 				<!-- <li>
 					<a href="#" title="">account settings</a>
 					<ul>
