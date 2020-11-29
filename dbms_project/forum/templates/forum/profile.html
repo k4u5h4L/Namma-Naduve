@@ -220,8 +220,8 @@
 								{% endif %}
 								<!-- add post new box -->
 								{% if posts|length != 0 %}
-								<div class="loadMore">
-									{% for post in posts %}
+								<div class="infinite-container">
+								{% for post in posts %}
 								<div class="central-meta item infinite-item">
 									<div class="user-post">
 										<div class="friend-info">
@@ -334,7 +334,10 @@
 									</div>
 								</div>
 								{% endfor %}
-									</div>
+							</div>
+							{% if page_obj.has_next %}
+							<a class="infinite-more-link" href="{% url 'profile_page' user_page.username %}?page={{ page_obj.next_page_number }}"></a>
+							{% endif %}
 									{% else %}
 									<div class="about">
 										<div class="personal">
@@ -619,7 +622,7 @@
 
 		for (let i in replyText) {
 		replyText[i].placeholder = "Send a reply";
-		replyText[i].className += "form-control";
+		replyText[i].className += " form-control";
 		}
 
 		// automatic profile pic submission on upload
@@ -629,3 +632,35 @@
 	</script>
 
 	{% endblock content %}
+
+	{% block strip_js %}
+	<script src="{% static 'forum/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'forum/js/infinite.min.js' %}"></script>
+
+	<script>
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container'),
+
+            offset: 'bottom-in-view',
+
+            onBeforePageLoad: function () {
+                $('.loading').show();
+            },
+            onAfterPageLoad: function () {
+                $('.loading').hide();
+
+				postTitle.placeholder = "Post title";
+				postTitle.className = "form-control";
+
+				postText.placeholder = "Post text";
+				postText.className = "form-control";
+
+				for (let i in replyText) {
+				replyText[i].placeholder = "Send a reply";
+				replyText[i].className += " form-control";
+		}
+            }
+
+        });
+    </script>
+	{% endblock strip_js %}

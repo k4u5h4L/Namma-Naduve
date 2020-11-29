@@ -271,7 +271,7 @@
 								</div>
 
 								{% if page_obj.has_next %}
-								<a class="infinite-more-link" href="{% url 'home_page' %}?page={{ page_obj.next_page_number }}">next</a>
+								<a class="infinite-more-link" href="{% url 'home_page' %}?page={{ page_obj.next_page_number }}">Loading</a>
 								{% endif %}
 							</div>
 							<!-- centerl meta -->
@@ -349,8 +349,8 @@
 		postText.className = "form-control";
 
 		for (let i in replyText) {
-		replyText[i].placeholder = "Send a reply";
-		replyText[i].className += "form-control";
+			replyText[i].placeholder = "Send a reply";
+			replyText[i].className += " form-control";
 		}
 	</script>
 
@@ -380,10 +380,9 @@
 
 				for (let i in replyText) {
 				replyText[i].placeholder = "Send a reply";
-				replyText[i].className += "form-control";
-		}
+				replyText[i].className += " form-control";
+				}
             }
-
         });
     </script>
 	{% endblock strip_js %}

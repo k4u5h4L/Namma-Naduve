@@ -47,10 +47,10 @@
 								</div>
 							</div>
 							-->
-							<div class="row">
+							<div class="row infinite-container">
 								{% for post in posts %}
 								<!-- #################################################################### -->
-								<div class="col-lg-4 col-sm-6">
+								<div class="col-lg-4 col-sm-6 infinite-item">
 									<div class="g-post-classic">
 										<figure>
 											<!-- <img alt="" src="images/resources/bloggrid-1.jpg">
@@ -76,6 +76,9 @@
 								<!-- #################################################################### -->
 								{% endfor %}
 							</div>
+							{% if page_obj.has_next %}
+								<a class="infinite-more-link" href="{% url 'search_results' %}?page={{ page_obj.next_page_number }}">next</a>
+							{% endif %}
 							<!-- <button class="btn-view btn-load-more">Load More</button> -->
 						</div>
 					</div>
@@ -97,4 +100,24 @@
 
 	{% endblock content %}
 
-	{% block strip_js %}<script src="{% static 'forum/js/strip.pkgd.min.js' %}"></script>{% endblock strip_js %}
+	{% block strip_js %}
+	<script src="{% static 'forum/js/strip.pkgd.min.js' %}"></script>
+
+	<script src="{% static 'forum/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'forum/js/infinite.min.js' %}"></script>
+
+	<script>
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container'),
+
+            offset: 'bottom-in-view',
+
+            onBeforePageLoad: function () {
+                $('.loading').show();
+            },
+            onAfterPageLoad: function () {
+                $('.loading').hide();
+            }
+        });
+    </script>
+	{% endblock strip_js %}

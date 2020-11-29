@@ -83,7 +83,20 @@ def profile_page(request, usr_name):
     except CustomUser.DoesNotExist:
         raise Http404("No CustomUser matches the given query.")
 
-    posts = Post.objects.filter(author=user_page)
+    posts = Post.objects.filter(author=user_page) #.order_by('-post_timestamp')
+
+    paginate = Paginator(posts, 2)
+    # the paginator object takes in the full posts query, and the amount of posts per page
+
+    page_num = request.GET.get('page', 1)
+    
+    try:
+        page = paginate.page(page_num)
+    except EmptyPage:
+        page = paginate.page(1)
+
+    posts = page
+
     post_form = PostForm()
     reply_form = ReplyForm()
     # print(posts)
@@ -93,6 +106,7 @@ def profile_page(request, usr_name):
         'post_form': post_form,
         'reply_form': reply_form,
         'username': usr_name,
+        'page_obj': page,
         # 'user_posts': posts,
     }
 
@@ -247,9 +261,20 @@ def search_results(request):
 
     posts = postFilter.qs
 
+    paginate = Paginator(posts, 12)
+    # the paginator object takes in the full posts query, and the amount of posts per page
+
+    page_num = request.GET.get('page', 1)
+
+    try:
+        page = paginate.page(page_num)
+    except EmptyPage:
+        page = paginate.page(1)
+
     context = {
         'postFilter': postFilter,
         'posts': posts,
+        'page_obj': page,
     }
     # do some searching using query string, and send that to the template
     return render(request, 'forum/search.html', context)
@@ -332,7 +357,6 @@ def create_reply(request, post_id):
 
 def faq_page(request):
     return render(request, 'forum/faq.html')
-
 
 def not_found_page(request, exception):
     return render(request, 'forum/404.html')
