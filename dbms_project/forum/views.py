@@ -270,6 +270,8 @@ def search_results(request):
         page = paginate.page(page_num)
     except EmptyPage:
         page = paginate.page(1)
+      
+    posts = page
 
     context = {
         'postFilter': postFilter,
