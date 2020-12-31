@@ -80,7 +80,7 @@
 				<li><span>Profile</span>
 					<ul>
 						<li><a href="{% url 'profile_page' user.username %}" title="">Overview</a></li>
-						<li><a href="timeline-friends.html" title="">About</a></li>
+						<li><a href="{% url 'profile_about_page' user.username %}" title="">About</a></li>
 					</ul>
                 </li>
                 <li><span>FAQ</span>
@@ -271,7 +271,7 @@
 					<a href="#" title="">Profile</a>
 					<ul>
 						<li><a href="{% url 'profile_page' user.username %}" title="">Overview</a></li>
-						<li><a href="about.html" title="">About</a></li>
+						<li><a href="{% url 'profile_page' user.username %}" title="">About</a></li>
 					</ul>
                 </li>
                 <li>
