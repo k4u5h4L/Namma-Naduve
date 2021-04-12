@@ -16,3 +16,10 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email')
+
+
+class ProfileForm(forms.Form):
+    CHOICES = [('student', 'student'),
+               ('teacher', 'teacher')]
+
+    t_s = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)

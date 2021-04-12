@@ -112,7 +112,7 @@
 								<div class="central-meta">
 									<div class="new-postbox">
 										<figure>
-											<img src="{% static 'forum/images/resources/admin2.jpg' %}" alt="">
+											<img src="{{ user.profile.image.url }}" alt="profile pic">
 										</figure>
 										<div class="newpst-input">
 											<form method="POST" action="/create/post/">
@@ -167,7 +167,7 @@
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img src="{% static 'forum/images/resources/friend-avatar10.jpg' %}" alt="">
+												<img src="{{ post.post.author.profile.image.url }}" alt="">
 											</figure>
 											<div class="friend-name">
 												<ins><a href="{% url 'profile_page' post.post.author.username %}" title="">{{ post.post.author }}</a></ins>
@@ -223,7 +223,7 @@
 												{% for reply in post.replies %}
 												<li>
 													<div class="comet-avatar">
-														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
+														<img src="{{ reply.author.profile.image.url }}" width="60" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
@@ -241,16 +241,23 @@
 												<li>
 													<a href="{% url 'post_page' post.post.id %}" title="" class="showmore underline">more comments</a>
 												</li>
+												{% else %}
+												<li>
+													<a class="showmore underline"><h6>No replies</h6></a>
+												</li>
 												{% endif %}
 												<li class="post-comment">
 													<div class="comet-avatar">
-														<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
+														<img src="{{ user.profile.image.url }}" alt="">
 													</div>
+													
 													<div class="post-comt-box">
 														<form method="post" action="/create/reply/{{ post.post.id }}">
 															{% csrf_token %}
 															<!-- <textarea placeholder="Post your comment"></textarea> -->
 															{{ reply_form.reply_text }}
+															<!-- <br> -->
+															<!-- <br> -->
 															<button type="submit"></button>
 														</form>
 													</div>
@@ -264,7 +271,7 @@
 								</div>
 
 								{% if page_obj.has_next %}
-								<a class="infinite-more-link" href="{% url 'home_page' %}?page={{ page_obj.next_page_number }}">next</a>
+								<a class="infinite-more-link" href="{% url 'home_page' %}?page={{ page_obj.next_page_number }}">Loading</a>
 								{% endif %}
 							</div>
 							<!-- centerl meta -->
@@ -282,43 +289,7 @@
 												<span><i class="ti-comment"></i><a href="#" title="">Replies <em>{{ user_replies_count }}</em></a></span>
 											</div>
 											<div class="page-likes">
-												<ul class="nav nav-tabs likes-btn">
-													<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">posts</a></li>
-													 <li class="nav-item"><a class="" href="#link2" data-toggle="tab">replies</a></li>
-												</ul>
-												<!-- Tab panes -->
-												<div class="tab-content">
-												  <div class="tab-pane active fade show " id="link1" >
-													<span><i class="ti-envelope"></i>884</span>
-													  <a href="#" title="weekly-likes">Some people who've replied</a>
-													  <div class="users-thumb-list">
-														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="{% static 'forum/images/resources/userlist-1.jpg' %}" alt="">  
-														</a>
-														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="{% static 'forum/images/resources/userlist-2.jpg' %}" alt="">  
-														</a>
-														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="{% static 'forum/images/resources/userlist-3.jpg' %}" alt="">  
-														</a>
-													  </div>
-												  </div>
-												  <div class="tab-pane fade" id="link2" >
-													  <span><i class="ti-comments-smiley"></i>440</span>
-													  <a href="#" title="weekly-likes">Some people you've replied to</a>
-													  <div class="users-thumb-list">
-														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="{% static 'forum/images/resources/userlist-1.jpg' %}" alt="">  
-														</a>
-														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="{% static 'forum/images/resources/userlist-2.jpg' %}" alt="">  
-														</a>
-														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="{% static 'forum/images/resources/userlist-3.jpg' %}" alt="">  
-														</a>
-													  </div>
-												  </div>
-												</div>
+												
 											</div>
 										</div>
 									</div><!-- page like widget -->
@@ -342,8 +313,8 @@
 		postText.className = "form-control";
 
 		for (let i in replyText) {
-		replyText[i].placeholder = "Send a reply";
-		replyText[i].className += "form-control";
+			replyText[i].placeholder = "Send a reply";
+			replyText[i].className += " form-control";
 		}
 	</script>
 
@@ -373,10 +344,9 @@
 
 				for (let i in replyText) {
 				replyText[i].placeholder = "Send a reply";
-				replyText[i].className += "form-control";
-		}
+				replyText[i].className += " form-control";
+				}
             }
-
         });
     </script>
 	{% endblock strip_js %}

@@ -24,13 +24,13 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="land-featurearea">
 					<div class="land-meta">
-						<h1>Site name</h1>
+						<h1>Namma Naduve</h1>
 						<p>
 							Experience delightful UI with unparalleled speed.
 						</p>
-						<div class="friend-logo">
-							<span><img src="{% static 'forum/images/wink.png' %}" alt=""></span>
-						</div>
+						<!-- <div class="friend-logo"> -->
+							<span><img src="{% static 'forum/images/logo2.png' %}" alt=""></span>
+						<!-- </div> -->
 						<!-- <a href="#" title="" class="folow-me">Follow Us on</a> -->
 					</div>	
 				</div>
@@ -41,7 +41,9 @@
 						{% if messages %}
 							{% for message in messages %}
 								<div class="alert alert-{{ message.tags }}">
-									{{ message }}
+									<!-- <button class="btn danger"> -->
+										{{ message }}
+									<!-- </button> -->
 								</div>
 							{% endfor %}
 						{% endif %}
@@ -49,8 +51,9 @@
 					<div class="log-reg-area sign">
 						<h2 class="log-title">Login</h2>
 							<p>
-								Hop in and start using (sitename)
+								Hop in and start using Namma Naduve
 							</p>
+							<form method="POST" action="/landing/password-reset/" id="resetform">{% csrf_token %}  </form>
 						<form method="POST" action="/landing/login/" name="loginForm" id="loginForm">
 							{% csrf_token %}
 							<div class="form-group">	
@@ -68,7 +71,13 @@
 								<input type="checkbox" checked="checked"/><i class="check-box"></i>Always Remember Me.
 							  </label>
 							</div> -->
-							<a href="#" title="" class="forgot-pwd">Forgot Password?</a>
+							<div>
+							<br>
+							<div class="align-right">
+								<input value="Forgot Password?" class="form-control" style="width: 170px;" form="resetform" type="submit"></input>
+							</div>
+
+						</div>
 							<div class="submit-btns">
 								<div class="align-left">
 									<br>
@@ -113,29 +122,30 @@
 							<div class="form-radio">
 							  <div class="radio">
 								<label>
-								  <input type="radio" name="radio" checked="checked"/><i class="check-box"></i>Student
+								  <input type="radio" value="S" name="radio" checked="checked"/><i class="check-box"></i>Student
 								</label>
 							  </div>
 							  <div class="radio">
 								<label>
-								  <input type="radio" name="radio"/><i class="check-box"></i>Teacher
+								  <input type="radio" value="T" name="radio"/><i class="check-box"></i>Teacher
 								</label>
 							  </div>
+							  
 							</div>
 							<!-- <div class="form-group">	
 							  <input type="text" required="required"/>
 							  <label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c29010d05002c">[email&#160;protected]</a></label><i class="mtrl-select"></i>
 							</div> -->
-							<!-- <div class="checkbox">
+							<div class="checkbox">
 							  <label>
-								<input type="checkbox" checked="checked"/><i class="check-box"></i>Accept Terms & Conditions ?
+								<input type="checkbox" id="tAndCCheckbox" onclick="tcCheckbox()" /><i class="check-box"></i>Accept Terms & Conditions?
 							  </label>
-							</div> -->
+							</div>
 							
 							<a href="#" title="" class="already-have align-right">Already have an account?</a>
 							<div class="submit-btns">
 								<!-- <button class="mtr-btn signup" type="submit"><span>Register</span></button> -->
-								<input class="mtr-btn signup" type="submit" placeholder="Register" value="Register" style="background-color: white;"/>
+								<input class="mtr-btn signup" id="registerBtn" type="submit" placeholder="Register" value="Register" style="background-color: white;"/>
 							</div>
 						</form>
 					</div>
@@ -144,6 +154,22 @@
 		</div>
 	</div>
 </div>
+
+	<!-- <script>
+		const tcCheckbox = () => {
+		// Get the checkbox
+		let checkBox = document.getElementById("tAndCCheckbox");
+		// Get the output text
+		let regBtn = document.getElementById("registerBtn");
+
+		// If the checkbox is checked, display the output text
+		if (regBtn.checked == true) {
+			regBtn.style.visibility = "visible";
+		} else {
+			regBtn.style.visibility = "hidden";
+		}
+		}
+	</script> -->
 
 	<!-- <script>
 		let form_fields = document.getElementsByTagName('label');

@@ -299,6 +299,8 @@ section {
 button,
 html [type="button"] {
     cursor: pointer;
+    float: right;
+
 }
 
 textarea {

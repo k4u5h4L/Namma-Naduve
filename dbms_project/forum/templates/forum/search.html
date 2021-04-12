@@ -4,33 +4,53 @@
 {% block title %}Search{% endblock title %}
 
 {% block strip_css %}<link rel="stylesheet" href="{% static 'forum/css/strip.css' %}">{% endblock strip_css %}
+{% load crispy_forms_tags %}
 {% block content %}
 	
 	<section>
 		<div class="gap gray-bg">
 			<div class="container">
 				<div class="row" id="page-contents">
-					<div class=" col-lg-12">
+					<div class=" col-lg-19">
 						<div class="blog-sec">
 							<div class="post-filter-sec">
 								<form method="GET" class="filter-form">
-									<!-- <input type="post" placeholder="Search post"> -->
-									{{ postFilter.form.post_title }}
-									<!-- <button><i class="ti-search"></i></button> -->
+									{{ postFilter.form|crispy }}
 									<div class="purify">
-										<span>filter by</span>
-										<!-- Tags: -->
-											{{ postFilter.form.tags }}
-										<!-- Post Author: -->
-											{{ postFilter.form.author }}
+										<!-- <span>filter by</span>
+											{{ postFilter.form.tags|as_crispy_field }}
+											{{ postFilter.form.author|as_crispy_field }} -->
 										<button id="filterBtn" class="btn btn-view" type="submit">Filter</button>
 									</div>
 								</form>
 							</div>
-							<div class="row">
+							<!--
+							<div class="post-filter-sec">
+								<form method="post" class="filter-form">
+									<input type="post" placeholder="Search post">
+									<button><i class="ti-search"></i></button>
+								</form>
+								<div class="purify">
+									<span>filter by</span>
+									<select>
+										<option>All categories</option>
+										<option>By Favouirtes</option>
+										<option>By Likes</option>
+									</select>
+									<select>
+										<option>Assending A-Z</option>
+										<option>Desending Z-A</option>
+										<option>Desending (date)</option>
+										<option>Asending (date)</option>
+									</select>
+									<a href="#" title="">purify</a>
+								</div>
+							</div>
+							-->
+							<div class="row infinite-container">
 								{% for post in posts %}
 								<!-- #################################################################### -->
-								<div class="col-lg-4 col-sm-6">
+								<div class="col-lg-4 col-sm-6 infinite-item">
 									<div class="g-post-classic">
 										<figure>
 											<!-- <img alt="" src="images/resources/bloggrid-1.jpg">
@@ -56,6 +76,9 @@
 								<!-- #################################################################### -->
 								{% endfor %}
 							</div>
+							{% if page_obj.has_next %}
+								<a class="infinite-more-link" href="{% url 'search_results' %}?page={{ page_obj.next_page_number }}">next</a>
+							{% endif %}
 							<!-- <button class="btn-view btn-load-more">Load More</button> -->
 						</div>
 					</div>
@@ -77,4 +100,24 @@
 
 	{% endblock content %}
 
-	{% block strip_js %}<script src="{% static 'forum/js/strip.pkgd.min.js' %}"></script>{% endblock strip_js %}
+	{% block strip_js %}
+	<script src="{% static 'forum/js/strip.pkgd.min.js' %}"></script>
+
+	<script src="{% static 'forum/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'forum/js/infinite.min.js' %}"></script>
+
+	<script>
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container'),
+
+            offset: 'bottom-in-view',
+
+            onBeforePageLoad: function () {
+                $('.loading').show();
+            },
+            onAfterPageLoad: function () {
+                $('.loading').hide();
+            }
+        });
+    </script>
+	{% endblock strip_js %}

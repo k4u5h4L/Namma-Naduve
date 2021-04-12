@@ -46,6 +46,7 @@
 									</ul>
 								</div>
 							-->
+							{% if user.is_athenticated %}
 								<div class="widget stick-widget">
 									<h4 class="widget-title">Quick Navigation</h4>
 										<ul class="naves">
@@ -55,7 +56,7 @@
 											</li>
 											<li>
 												<i class="ti-user"></i>
-												<a href="profile.html" title="">Profile</a>
+												<a href="{% url 'profile_page' user.username %}" title="">Profile</a>
 											</li>
 											<li>
 												<i class="ti-power-off"></i>
@@ -63,6 +64,7 @@
 											</li>
 										</ul>
 								</div><!-- Shortcuts -->
+							{% endif %}
 							</aside>	
 						</div>
 						<div class="col-lg-9">
@@ -73,18 +75,18 @@
 									<div class="card-header" id="headingOne">
 									  <h5 class="mb-0">
 										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										  How to make your own social website ?
+										  How to Change the Password ?
 										</button>
 									  </h5>
 									</div>
 
 									<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 									  <div class="card-body">
-										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+										Please click on the "Forgot Password" in the Login Page 
 										<ol>
-											<li>register yourself on friendzone</li>
-											<li>go to the setting panal</li>
-											<li>click on create page</li>
+											<li>Enter The registered Email Id </li>
+											<li>Verify the new Password </li>
+											<li>Use the new password to enter form next time onwards </li>
 										</ol>
 									  </div>
 									</div>
@@ -93,13 +95,19 @@
 									<div class="card-header" id="headingTwo">
 									  <h5 class="mb-0">
 										<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-										  How to edit my page setting?
+										  How to Register If I am a new User ?
 										</button>
 									  </h5>
 									</div>
 									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 									  <div class="card-body">
-										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, 
+										If you are a New user,No worries welcome to the portal
+										<ol>
+											<li>When you enter the Login Page click on the Register User </li>
+											<li>Create a Profile </li>
+											<li>Password Protect the Profile  </li>
+											<li>Post away </li>
+										</ol>	 
 									  </div>
 									</div>
 								  </div>
@@ -107,13 +115,20 @@
 									<div class="card-header" id="headingThree">
 									  <h5 class="mb-0">
 										<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-										  How to change password ?
+										  How to Post Comments ?
 										</button>
 									  </h5>
 									</div>
 									<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 									  <div class="card-body">
-										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. 
+										The post feature will be visible on the top Center of the screen
+										<ol>
+											<li>Enter the Post title </li>
+											<li>Enter the text you want to ask the Lecturers  </li>
+											<li>Choose a topic under which you want to classify the Post under</li>
+											<li>Be cautious not to include Explicit as it will automatically detect it and Ask to retype the contents</li>
+											<li>Click the Post button to submit the post to the portal </li>
+										</ol>	
 									  </div>
 									</div>
 								  </div>
@@ -121,13 +136,16 @@
 									<div class="card-header" id="headingfour">
 									  <h5 class="mb-0">
 										<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-										  How to search people nearby with location ?
+											What type of posts are allowed ?
 										</button>
 									  </h5>
 									</div>
 									<div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordion">
 									  <div class="card-body">
-										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. 
+										<ol>
+											<li>Posts related to college specifically.</li>
+											<li> Doubt posts and other posts can be posted</li>
+										</ol>
 									  </div>
 									</div>
 								  </div>
@@ -135,13 +153,13 @@
 									<div class="card-header" id="headingfive">
 									  <h5 class="mb-0">
 										<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
-										  How to Make your favourit page ?
+										I'm not able to post something.Help!
 										</button>
 									  </h5>
 									</div>
 									<div id="collapsefive" class="collapse" aria-labelledby="headingfive" data-parent="#accordion">
 									  <div class="card-body">
-										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. 
+										 Don't Panic. Kindly contact the admins at admin@abc.com
 									  </div>
 									</div>
 								  </div>

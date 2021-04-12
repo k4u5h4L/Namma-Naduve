@@ -8,7 +8,13 @@
 			<figure><img id="coverImg" alt="cover pic" /></figure>
 			<div class="add-btn">
 				<span>Is currently a </span>
-				<a style="color: white;cursor: default;" title="" data-ripple="">Student</a>
+				<a style="color: white;cursor: default;" title="" data-ripple="">
+				{% if user_page.profile.t_s == "T" %}
+				Teacher
+				{% else %}
+				Student
+				{% endif %}
+				</a>
 			</div>
 			<!-- <form class="edit-phto">
 				<i class="fa fa-camera-retro"></i>
@@ -22,14 +28,21 @@
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="{{ user.profile.image.url }}" alt="profile pic">
-								<form class="edit-phto">
+								<img src="{{ user_page.profile.image.url }}" alt="profile pic">
+								{% if user == user_page %}
+								<form class="edit-phto" id="profilePicForm" method="POST" enctype="multipart/form-data" action="/user/{{ user.username }}/update/pic/">
 									<i class="fa fa-camera-retro"></i>
+									{% csrf_token %}
+
 									<label class="fileContainer">
 										Edit Profile Pic
-										<input type="file"/>
+										<input type="file" name="image" accept="image/*" id="id_image"/>
 									</label>
+
+
+									<!-- <button type="submit">upload</button> -->
 								</form>
+								{% endif %}
 							</figure>
 						</div>
 					</div>
@@ -41,8 +54,8 @@
 								  <!-- <span>Group Admin</span> -->
 								</li>
 								<li>
-									<a class="active" href="#" title="" data-ripple="">Overview</a>
-									<a class="" href="about.html" title="" data-ripple="">about</a>
+									<a class="active" href="{% url 'profile_page' user_page.username %}" title="" data-ripple="">Overview</a>
+									<a class="" href="{% url 'profile_about_page' user_page.username %}" title="" data-ripple="">about</a>
 								</li>
 							</ul>
 						</div>
@@ -151,16 +164,24 @@
 								<div class="central-meta">
 									<div class="new-postbox">
 										<figure>
-											<img src="{% static 'forum/images/resources/admin2.jpg' %}" alt="">
+											<img src="{{ user.profile.image.url }}" alt="">
 										</figure>
 										<div class="newpst-input">
-											<form method="post">
+											<form method="post" action='/create/post/'>
+												{% csrf_token %}
+
+												<!-- {{ post_form.post_title }} -->
+												<!-- {{ post_form.post_text }} -->
+												
 												<div>
-													<textarea rows="1" placeholder="post title"></textarea>
+													<textarea type="text" name="post_title" maxlength="100" required="" id="id_post_title" rows="1" placeholder="post title"></textarea>
 												</div>
 												<div>
-													<textarea rows="2" placeholder="post a query"></textarea>
-												</div>												
+													<textarea type="text" name="post_text" maxlength="100" required="" id="id_post_text" rows="2" placeholder="post a query"></textarea>
+												</div>	
+												<div>
+													{{ post_form.tags }}
+												</div>											
 												<div class="attachments">
 													<ul>
 														<!-- <li>
@@ -199,136 +220,124 @@
 								{% endif %}
 								<!-- add post new box -->
 								{% if posts|length != 0 %}
-								<div class="loadMore">
-									{% for post in posts %}
-									<div class="central-meta item">
-										<div class="user-post">
-											<div class="friend-info">
-												<figure>
-													<img src="{% static 'forum/images/resources/friend-avatar10.jpg' %}" alt="">
-												</figure>
-												<div class="friend-name">
-													<ins><a href="time-line.html" title="">{{ post.post.author }}</a></ins>
-													<span>published: {{ post.post.post_timestamp }}</span>
-												</div>
-												<div class="post-meta">
-													<a href="{% url 'post_page' post.post.id %}">
-														<!-- <img src="{% static 'forum/images/resources/user-post.jpg' %}" alt="" /> -->
-														<div class="post-meta">
-															<div class="detail">
-																<span>{{ post.post.post_title }}</span>
-															</div>	
-														</div>
-														<div class="description">
-															<p>
-																{{ post.post.post_text }}
-															</p>
-														</div>
-														<div class="we-video-info">
-															<ul>
-																<!-- <li>
-																	<span class="views" data-toggle="tooltip" title="views">
-																		<i class="fa fa-eye"></i>
-																		<ins>1.2k</ins>
-																	</span>
-																</li> -->
-																<li>
-																	<span class="comment" data-toggle="tooltip" title="Replies">
-																		<i class="fa fa-comments-o"></i>
-																		<ins>{{ post.replies|length }}</ins>
-																	</span>
-																</li>
-																<!-- <li>
-																	<span class="like" data-toggle="tooltip" title="like">
-																		<i class="ti-heart"></i>
-																		<ins>2.2k</ins>
-																	</span>
-																</li>
-																<li>
-																	<span class="dislike" data-toggle="tooltip" title="dislike">
-																		<i class="ti-heart-broken"></i>
-																		<ins>200</ins>
-																	</span>
-																</li> -->
-																<!-- <li class="social-media">
-																	<div class="menu">
-																		<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-																		<div class="rotater">
-																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																			</div>
-																		</div>
-																		
-																	</div>
-																</li> -->
-															</ul>
-														</div>
-													</a>
-												</div>
+								<div class="infinite-container">
+								{% for post in posts %}
+								<div class="central-meta item infinite-item">
+									<div class="user-post">
+										<div class="friend-info">
+											<figure>
+												<img src="{{ post.post.author.profile.image.url }}" alt="">
+											</figure>
+											<div class="friend-name">
+												<ins><a href="{% url 'profile_page' post.post.author.username %}" title="">{{ post.post.author }}</a></ins>
+												<span>published: {{ post.post.post_timestamp }}</span>
 											</div>
-											<div class="coment-area">
-												<ul class="we-comet">
-													{% for reply in post.replies %}
-													<li>
-														<div class="comet-avatar">
-															<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
-														</div>
-														<div class="we-comment">
-															<div class="coment-head">
-																<h5><a href="#" title="">{{ reply.author.username }}</a></h5>
-																<span>{{ reply.reply_timestamp }}</span>
-																<!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
-															</div>
-															<p>{{ reply.reply_text }}</p>
-														</div>
-													</li>
-	
-													{% endfor %}
-					
-													{% if post.replies|length != 0 %}
-													<li>
-														<a href="{% url 'post_page' post.post.id %}" title="" class="showmore underline">more comments</a>
-													</li>
-													{% endif %}
-													<li class="post-comment">
-														<div class="comet-avatar">
-															<img src="{% static 'forum/images/resources/comet-1.jpg' %}" alt="">
-														</div>
-														<div class="post-comt-box">
-															<form method="post">
-																<textarea placeholder="Post your comment"></textarea>
-																<button type="submit"></button>
-															</form>
-														</div>
-													</li>
-												</ul>
+											<div class="post-meta">
+												<a href="{% url 'post_page' post.post.id %}">
+													<!-- <img src="{% static 'forum/images/resources/user-post.jpg' %}" alt="" /> -->
+													<div class="post-meta">
+														<div class="detail">
+															<span>{{ post.post.post_title }}</span>
+														</div>	
+													</div>
+													<div class="description">
+														<p>
+															{{ post.post.post_text }}
+														</p>
+													</div>
+													<div class="we-video-info">
+														<ul>
+															<!-- <li>
+																<span class="views" data-toggle="tooltip" title="views">
+																	<i class="fa fa-eye"></i>
+																	<ins>1.2k</ins>
+																</span>
+															</li> -->
+															<li>
+																<span class="comment" data-toggle="tooltip" title="Replies">
+																	<i class="fa fa-comments-o"></i>
+																	<ins>{{ post.replies|length }}</ins>
+																</span>
+															</li>
+															<!-- <li>
+																<span class="like" data-toggle="tooltip" title="like">
+																	<i class="ti-heart"></i>
+																	<ins>2.2k</ins>
+																</span>
+															</li>
+															<li>
+																<span class="dislike" data-toggle="tooltip" title="dislike">
+																	<i class="ti-heart-broken"></i>
+																	<ins>200</ins>
+																</span>
+															</li> -->
+															
+														</ul>
+													</div>
+												</a>
 											</div>
 										</div>
+										{% if user == user_page %}
+											<form method="POST" action="/delete/{{ post.post.id }}" >
+												{% csrf_token %}
+
+												<button type="submit">Delete</button>
+
+											</form>
+											{% endif %}
+										<div class="coment-area">
+											<ul class="we-comet">
+												{% for reply in post.replies %}
+												<li>
+													<div class="comet-avatar">
+														<img src="{{ reply.author.profile.image.url }}" width="60" alt="">
+													</div>
+													<div class="we-comment">
+														<div class="coment-head">
+															<h5><a href="{% url 'profile_page' reply.author.username %}" title="">{{ reply.author.username }}</a></h5>
+															<span>{{ reply.reply_timestamp }}</span>
+															<!-- <a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a> -->
+														</div>
+														<p>{{ reply.reply_text }}</p>
+													</div>
+												</li>
+
+												{% endfor %}
+				
+												{% if post.replies|length != 0 %}
+												<li>
+													<a href="{% url 'post_page' post.post.id %}" title="" class="showmore underline">more comments</a>
+												</li>
+												{% else %}
+												<li>
+													<a class="showmore underline"><h6>No replies</h6></a>
+												</li>
+												{% endif %}
+												<li class="post-comment">
+													<div class="comet-avatar">
+														<img src="{{ user.profile.image.url }}" alt="">
+													</div>
+													
+													<div class="post-comt-box">
+														<form method="post" action="/create/reply/{{ post.post.id }}">
+															{% csrf_token %}
+															<!-- <textarea placeholder="Post your comment"></textarea> -->
+															{{ reply_form.reply_text }}
+															<!-- <br> -->
+															<!-- <br> -->
+															<button type="submit"></button>
+														</form>
+													</div>
+												</li>
+											</ul>
+										</div>
 									</div>
-									{% endfor %}
-									</div>
+								</div>
+								{% endfor %}
+							</div>
+							{% if page_obj.has_next %}
+							<a class="infinite-more-link" href="{% url 'profile_page' user_page.username %}?page={{ page_obj.next_page_number }}"></a>
+							{% endif %}
 									{% else %}
 									<div class="about">
 										<div class="personal">
@@ -355,12 +364,9 @@
 												<span><i class="ti-comment"></i><a href="#" title="">Replies <em>{{ user_replies_count }}</em></a></span>
 											</div>
 											<div class="page-likes">
-												<ul class="nav nav-tabs likes-btn">
-													<li class="nav-item"><a class="active" href="#link1" data-toggle="tab">posts</a></li>
-													 <li class="nav-item"><a class="" href="#link2" data-toggle="tab">replies</a></li>
-												</ul>
+												
 												<!-- Tab panes -->
-												<div class="tab-content">
+												<!-- <div class="tab-content">
 												  <div class="tab-pane active fade show " id="link1" >
 													<span><i class="ti-envelope"></i>884</span>
 													  <a href="#" title="weekly-likes">Some people who've replied</a>
@@ -391,7 +397,7 @@
 														</a>
 													  </div>
 												  </div>
-												</div>
+												</div> -->
 											</div>
 										</div>
 									</div><!-- page like widget -->
@@ -600,6 +606,58 @@
 		coverImage.src = coverImages[Math.floor(Math.random() * coverImages.length)];
 		
 		coverImage.style.height = "520px";
+
+		let postTitle = document.getElementById('id_post_title');
+		let postText = document.getElementById('id_post_text');
+		let replyText = document.getElementsByName('reply_text');
+
+		postTitle.placeholder = "Post title";
+		postTitle.className = "form-control";
+
+		postText.placeholder = "Post text";
+		postText.className = "form-control";
+
+		for (let i in replyText) {
+		replyText[i].placeholder = "Send a reply";
+		replyText[i].className += " form-control";
+		}
+
+		// automatic profile pic submission on upload
+		document.getElementById("id_image").onchange = () => {
+			document.getElementById("profilePicForm").submit();
+		};
 	</script>
 
 	{% endblock content %}
+
+	{% block strip_js %}
+	<script src="{% static 'forum/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'forum/js/infinite.min.js' %}"></script>
+
+	<script>
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container'),
+
+            offset: 'bottom-in-view',
+
+            onBeforePageLoad: function () {
+                $('.loading').show();
+            },
+            onAfterPageLoad: function () {
+                $('.loading').hide();
+
+				postTitle.placeholder = "Post title";
+				postTitle.className = "form-control";
+
+				postText.placeholder = "Post text";
+				postText.className = "form-control";
+
+				for (let i in replyText) {
+				replyText[i].placeholder = "Send a reply";
+				replyText[i].className += " form-control";
+		}
+            }
+
+        });
+    </script>
+	{% endblock strip_js %}

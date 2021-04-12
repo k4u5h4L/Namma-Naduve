@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,9 @@ SECRET_KEY = 't0tg=#gig0-+j+=wc^2ou%9e42hxwn8(%!id(kb0__8wdjfyc3'
 DEBUG = True
 # Put debug = False to get the custom 404 error page
 
-ALLOWED_HOSTS = ['127.0.0.1', '*']
+ALLOWED_HOSTS = ['*', '127.0.0.1']
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Application definition
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     'forum',
     'users',
     'django_filters',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "forum/static")
 
 APPEND_SLASH = False
 
@@ -134,3 +139,18 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_URL = 'landing_page'
 LOGIN_REDIRECT_URL = 'home_page'
 LOGOUT_REDIRECT_URL = 'landing_page'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+
+# EMAIL_HOST_USER = os.environ.get('USR')
+# EMAIL_HOST_PASSWORD = os.environ.get('PASSWORD')
+
+with open(f'{os.getcwd()}/dbms_project/config.json') as fp:
+  email_cred = json.load(fp)
+
+EMAIL_HOST_USER = email_cred['EMAIL_USR']
+EMAIL_HOST_PASSWORD = email_cred['EMAI_PASSWD']
+
+EMAIL_USE_TLS = True

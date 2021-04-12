@@ -1,0 +1,555 @@
+{% extends "forum/base/base.html" %}
+{% load static %}
+{% block title %}About Page{% endblock title %}
+{% block content %}
+		
+	<section>
+		<div class="feature-photo">
+			<figure><img id="coverImg" alt="cover pic" /></figure>
+			<div class="add-btn">
+				<span>Is currently a </span>
+				<a style="color: white;cursor: default;" title="" data-ripple="">
+				{% if user_page.profile.t_s == "T" %}
+				Teacher
+				{% else %}
+				Student
+				{% endif %}
+				</a>
+			</div>
+			<!-- <form class="edit-phto">
+				<i class="fa fa-camera-retro"></i>
+				<label class="fileContainer">
+					Edit Cover Photo
+				<input type="file"/>
+				</label>
+			</form> -->
+			<div class="container-fluid">
+				<div class="row merged">
+					<div class="col-lg-2 col-sm-3">
+						<div class="user-avatar">
+							<figure>
+								<img src="{{ user_page.profile.image.url }}" alt="profile pic">
+								{% if user == user_page %}
+								<form class="edit-phto" id="profilePicForm" method="POST" enctype="multipart/form-data" action="/user/{{ user.username }}/update/pic/">
+									<i class="fa fa-camera-retro"></i>
+									{% csrf_token %}
+
+									<label class="fileContainer">
+										Edit Profile Pic
+										<input type="file" name="image" accept="image/*" id="id_image"/>
+									</label>
+
+
+									<!-- <button type="submit">upload</button> -->
+								</form>
+								{% endif %}
+							</figure>
+						</div>
+					</div>
+					<div class="col-lg-10 col-sm-9">
+						<div class="timeline-info">
+							<ul>
+								<li class="admin-name">
+								  <h5>{{ user_page.username }}</h5>
+								  <!-- <span>Group Admin</span> -->
+								</li>
+								<li>
+									<a class="" href="{% url 'profile_page' user_page.username %}" title="" data-ripple="">Overview</a>
+									<a class="" href="{% url 'profile_about_page' user_page.username %}" title="" data-ripple="">About</a>
+									<a class="active" href="{% url 'profile_update_page' user_page.username %}" title="" data-ripple="">Update</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- top area -->
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">Quick Navigation</h4>
+										<ul class="naves">
+											<li>
+												<i class="ti-files"></i>
+												<a href="{% url 'home_page' %}" title="">Home Feed</a>
+											</li>
+											<li>
+												<i class="ti-clipboard"></i>
+												<a href="{% url 'faq_page' %}" title="">FAQ</a>
+											</li>
+											<li>
+												<i class="ti-power-off"></i>
+												<a href="{% url 'logout_page' %}" title="">Logout</a>
+											</li>
+										</ul>
+									</div><!-- Shortcuts -->
+									<!-- <div class="widget">
+										<h4 class="widget-title">Recent Activity</h4>
+										<ul class="activitiez">
+											<li>
+												<div class="activity-meta">
+													<i>10 hours Ago</i>
+													<span><a href="#" title="">Commented on Video posted </a></span>
+													<h6>by <a href="time-line.html">black demon.</a></h6>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>30 Days Ago</i>
+													<span><a href="#" title="">Posted your status. “Hello guys, how are you?”</a></span>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>2 Years Ago</i>
+													<span><a href="#" title="">Share a video on her timeline.</a></span>
+													<h6>"<a href="#">you are so funny mr.been.</a>"</h6>
+												</div>
+											</li>
+										</ul>
+									</div> -->
+									<!-- recent activites -->
+									<!-- <div class="widget stick-widget">
+										<h4 class="widget-title">Who's follownig</h4>
+										<ul class="followers">
+											<li>
+												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Kelly Bill</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Issabel</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Andrew</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Sophia</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+											<li>
+												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="time-line.html" title="">Allen</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+										</ul>
+									</div> -->
+									<!-- who's following -->
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								<!-- the central widget -->
+								<!-- replace from this line to line 230-->
+                                    <div class="central-meta">
+                                        <div class="editing-info">
+                                            <h5 class="f-title"><i class="ti-info-alt"></i> Edit Basic Information</h5>
+    
+											<form method="POST" action="/user/{{ user.username }}/update/">
+												{% csrf_token %}
+
+                                                <div class="form-group ">	
+                                                  <input type="text" name="full_name" maxlength="50" id="id_full_name" required="required"/>
+												  <label class="control-label" for="input">Full Name</label><i class="mtrl-select"></i>
+												</div>
+												
+                                                <div class="form-group ">
+												  <input type="text" name="location" maxlength="100" id="id_location" required="required"/>
+                                                  <label class="control-label" for="input">Location</label><i class="mtrl-select"></i>
+												</div>
+												
+                                                <div class="form-group">	
+												  <input type="text" name="personal_site" maxlength="60" id="id_personal_site" required="required"/>
+                                                  <label class="control-label" for="input"><a>Personal Site </a></label><i class="mtrl-select"></i>
+												</div>
+												
+                                                <div class="form-group">
+                                                  <input type="text" name="phone_no" maxlength="14" id="id_phone_no" required="required"/>
+                                                  <label class="control-label" for="input">Phone No.</label><i class="mtrl-select"></i>
+												</div>
+												
+                                                
+                                                <div class="form-radio">
+                                                  <div class="radio">
+                                                    <label>
+                                                      <input type="radio" value="T" checked="checked" name="radio"><i class="check-box"></i>Teacher
+                                                    </label>
+                                                  </div>
+                                                  <div class="radio">
+                                                    <label>
+                                                      <input type="radio" value="S" name="radio"><i class="check-box"></i>Student
+                                                    </label>
+                                                  </div>
+												</div>
+                                                
+                                                <div class="form-group">	
+                                                  <textarea rows="3" maxlength="500" id="id_bio" name="bio" required="required"></textarea>
+                                                  <label class="control-label" for="textarea">About Me</label><i class="mtrl-select"></i>
+												</div>
+												
+                                                <div class="submit-btns">
+                                                    <button type="submit" class="mtr-btn"><span>Update</span></button>
+                                                </div>
+                                            </form>
+										</div>
+                                    </div>	
+                                </div><!-- centerl meta -->
+								
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">Your profile</h4>	
+										<div class="your-page">
+											<figure>
+												<a href="#" title=""><img src="{{ user.profile.image.url }}" alt=""></a>
+											</figure>
+											<div class="page-meta">
+												<a href="#" title="" class="underline">{{ user.username }}</a>
+												<span><i class="ti-envelope"></i><a href="#" title="">Posts <em>{{ user_posts_count }}</em></a></span>
+												<span><i class="ti-comment"></i><a href="#" title="">Replies <em>{{ user_replies_count }}</em></a></span>
+											</div>
+											<div class="page-likes">
+												
+												<!-- Tab panes -->
+												<!-- <div class="tab-content">
+												  <div class="tab-pane active fade show " id="link1" >
+													<span><i class="ti-envelope"></i>884</span>
+													  <a href="#" title="weekly-likes">Some people who've replied</a>
+													  <div class="users-thumb-list">
+														<a href="#" title="Anderw" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-1.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="frank" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-2.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="Sara" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-3.jpg' %}" alt="">  
+														</a>
+													  </div>
+												  </div>
+												  <div class="tab-pane fade" id="link2" >
+													  <span><i class="ti-comments-smiley"></i>440</span>
+													  <a href="#" title="weekly-likes">Some people you've replied to</a>
+													  <div class="users-thumb-list">
+														<a href="#" title="Anderw" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-1.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="frank" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-2.jpg' %}" alt="">  
+														</a>
+														<a href="#" title="Sara" data-toggle="tooltip">
+															<img src="{% static 'forum/images/resources/userlist-3.jpg' %}" alt="">  
+														</a>
+													  </div>
+												  </div>
+												</div> -->
+											</div>
+										</div>
+									</div><!-- page like widget -->
+									<!-- <div class="widget">
+										<div class="banner medium-opacity bluesh">
+											<div class="bg-image" style="background-image: url(images/resources/baner-widgetbg.jpg)"></div>
+											<div class="baner-top">
+												<span><img alt="" src="images/book-icon.png"></span>
+												<i class="fa fa-ellipsis-h"></i>
+											</div>
+											<div class="banermeta">
+												<p>
+													create your own favourit page.
+												</p>
+												<span>like them all</span>
+												<a data-ripple="" title="" href="#">start now!</a>
+											</div>
+										</div>											
+									</div> -->
+									<!-- <div class="widget friend-list stick-widget">
+										<h4 class="widget-title">Friends</h4>
+										<div id="searchDir"></div>
+										<ul id="people-list" class="friendz-list">
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">bucky barnes</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d7c9ced4c5d2d3cfccc4c5d2e0c7cdc1c9cc8ec3cfcd">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar2.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Sarah Loren</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4d6d5c6dad1c7f4d3d9d5ddd89ad7dbd9">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar3.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">jason borne</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d777c6e72737f5d7a707c7471337e7270">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												<figure>
+													<img src="images/resources/friend-avatar4.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Cameron diaz</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bed4dfcdd1d0dcfed9d3dfd7d290ddd1d3">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar5.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">daniel warber</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="553f34263a3b37153238343c397b363a38">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar6.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">andrew</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5933382a36373b193e34383035773a3634">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar7.jpg" alt="">
+													<span class="status f-off"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">amy watson</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5933382a36373b193e34383035773a3634">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar5.jpg" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">daniel warber</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb1baa8b4b5b99bbcb6bab2b7f5b8b4b6">[email&#160;protected]</a></i>
+												</div>
+											</li>
+											<li>
+												
+												<figure>
+													<img src="images/resources/friend-avatar2.jpg" alt="">
+													<span class="status f-away"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="time-line.html">Sarah Loren</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2644475448435566414b474f4a0845494b">[email&#160;protected]</a></i>
+												</div>
+											</li>
+										</ul>
+										<div class="chat-box">
+											<div class="chat-head">
+												<span class="status f-online"></span>
+												<h6>Bucky Barnes</h6>
+												<div class="more">
+													<span><i class="ti-more-alt"></i></span>
+													<span class="close-mesage"><i class="ti-close"></i></span>
+												</div>
+											</div>
+											<div class="chat-list">
+												<ul>
+													<li class="me">
+														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="you">
+														<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="me">
+														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+												</ul>
+												<form class="text-box">
+													<textarea placeholder="Post enter to post..."></textarea>
+													<div class="add-smiles">
+														<span title="add icon" class="em em-expressionless"></span>
+													</div>
+													<div class="smiles-bunch">
+														<i class="em em---1"></i>
+														<i class="em em-smiley"></i>
+														<i class="em em-anguished"></i>
+														<i class="em em-laughing"></i>
+														<i class="em em-angry"></i>
+														<i class="em em-astonished"></i>
+														<i class="em em-blush"></i>
+														<i class="em em-disappointed"></i>
+														<i class="em em-worried"></i>
+														<i class="em em-kissing_heart"></i>
+														<i class="em em-rage"></i>
+														<i class="em em-stuck_out_tongue"></i>
+													</div>
+													<button type="submit"></button>
+												</form>
+											</div>
+										</div>
+									</div>friends list sidebar -->
+								</aside>
+							</div><!-- sidebar -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+
+	<script>
+		let coverImage = document.getElementById('coverImg');
+
+		const coverImages = [
+			"{% static 'forum/images/resources/timeline-1.jpg' %}",
+			"https://images.wallpaperscraft.com/image/palm_trees_sunset_clouds_135077_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/road_asphalt_marking_130996_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/landscape_mountains_sun_140434_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/starry_sky_night_trees_night_landscape_118760_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/beach_night_sea_sky_88045_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/mountains_sky_bali_sunrise_kintamani_indonesia_95497_1920x1080.jpg",
+			"https://images.wallpaperscraft.com/image/mountains_sea_ocean_clouds_night_96938_1920x1080.jpg",
+		];
+
+		coverImage.src = coverImages[Math.floor(Math.random() * coverImages.length)];
+		
+		coverImage.style.height = "520px";
+
+		// automatic profile pic submission on upload
+		document.getElementById("id_image").onchange = () => {
+		document.getElementById("profilePicForm").submit();
+		};
+	</script>
+
+	{% endblock content %}
+
+
+<!-- <div class="central-meta">
+	<div class="about">
+		<div class="personal">
+			<h5 class="f-title"><i class="ti-info-alt"></i> Personal Info</h5>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</p>
+		</div>
+		<div class="d-flex flex-row mt-2">
+			<ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" >
+				<li class="nav-item">
+					<a href="#basic" class="nav-link active" data-toggle="tab" >Basic info</a>
+				</li>
+				<li class="nav-item">
+					<a href="#location" class="nav-link" data-toggle="tab" >location</a>
+				</li>
+				<li class="nav-item">
+					<a href="#work" class="nav-link" data-toggle="tab" >work and education</a>
+				</li>
+				<li class="nav-item">
+					<a href="#interest" class="nav-link" data-toggle="tab"  >interests</a>
+				</li>
+				<li class="nav-item">
+					<a href="#lang" class="nav-link" data-toggle="tab" >languages</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="basic" >
+					<ul class="basics">
+						<li><i class="ti-user"></i>sarah grey</li>
+						<li><i class="ti-map-alt"></i>live in Dubai</li>
+						<li><i class="ti-mobile"></i>+1-234-345675</li>
+						<li><i class="ti-email"></i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c4553494e515d55507c59515d5550125f5351">[email&#160;protected]</a></li>
+						<li><i class="ti-world"></i>www.yoursite.com</li>
+					</ul>
+				</div>
+				<div class="tab-pane fade" id="location" role="tabpanel">
+					<div class="location-map">
+						<div id="map-canvas"></div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="work" role="tabpanel">
+					<div>
+						
+						<a href="#" title="">Envato</a>
+						<p>work as autohr in envato themeforest from 2013</p> 
+						<ul class="education">
+							<li><i class="ti-facebook"></i> BSCS from Oxford University</li>
+							<li><i class="ti-twitter"></i> MSCS from Harvard Unversity</li>
+						</ul>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="interest" role="tabpanel">
+					<ul class="basics">
+						<li>Footbal</li>
+						<li>internet</li>
+						<li>photography</li>
+					</ul>
+				</div>
+				<div class="tab-pane fade" id="lang" role="tabpanel">
+					<ul class="basics">
+						<li>english</li>
+						<li>french</li>
+						<li>spanish</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
