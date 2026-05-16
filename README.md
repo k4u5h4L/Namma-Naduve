@@ -1,4 +1,4 @@
-# DBMS Project
+# Namma Naduve (translation: "Between Us")
 
 ## Setup
 
